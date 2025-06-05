@@ -1,0 +1,39 @@
+{
+  "version": "0.2",
+  "language": "en,zh",
+  "words": [
+    "threejs",
+    "gsap",
+    "tailwindcss",
+    "nextjs",
+    "typescript",
+    "javascript",
+    "reactjs",
+    "webgl",
+    "glsl",
+    "shader",
+    "threejs",
+    "gsap",
+    "tailwindcss",
+    "nextjs",
+    "typescript",
+    "javascript",
+    "reactjs",
+    "webgl",
+    "glsl",
+    "shader",
+    "AirpodsAnimation",
+    "Airpods",
+    "Playhead"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    ".next/**"
+  ]
+}
