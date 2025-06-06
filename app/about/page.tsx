@@ -19,7 +19,7 @@ export default function AboutPage() {
     const img = new Image();
     img.onload = () => setHasBackgroundImage(true);
     img.onerror = () => setHasBackgroundImage(false);
-    img.src = "/images/about-bg.jpg";
+    img.src = "/images/background.jpg";
 
     const ctx = gsap.context(() => {
       // 标题打字机效果
@@ -104,7 +104,7 @@ export default function AboutPage() {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('/images/about-bg.jpg')",
+              backgroundImage: "url('/images/background.jpg')",
               backgroundBlendMode: "overlay",
             }}
           />
@@ -115,11 +115,11 @@ export default function AboutPage() {
         <div className="relative z-10 text-center px-4">
           <h1
             ref={titleRef}
-            className="text-6xl font-bold text-gray-900 mb-6"
+            className="text-6xl font-bold text-gray-100 mb-6"
           />
           <p
             ref={descriptionRef}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-100 max-w-2xl mx-auto"
           >
             热爱技术，追求创新，致力于创造优秀的用户体验
           </p>
