@@ -172,7 +172,7 @@ export const AirpodsAnimation: React.FC = () => {
                 className="w-full h-full overflow-hidden relative"
                 onWheel={handleWheel}
               >
-                {!isLoading && (
+                {isLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black">
                     <CometLoading />
                   </div>
