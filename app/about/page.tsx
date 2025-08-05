@@ -97,7 +97,10 @@ export default function AboutPage() {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gray-50">
+    <div
+      ref={containerRef}
+      className="min-h-screen bg-gray-50 dark:bg-gray-900"
+    >
       {/* 头部区域 */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {hasBackgroundImage ? (
@@ -127,24 +130,24 @@ export default function AboutPage() {
       </div>
 
       {/* 技能区域 */}
-      <div ref={skillsRef} className="py-20 px-4 bg-white">
+      <div ref={skillsRef} className="py-20 px-4 bg-white dark:bg-gray-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
             专业技能
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skill) => (
               <div
                 key={skill.name}
-                className="skill-card group relative bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 h-[200px] flex flex-col justify-between"
+                className="skill-card group relative bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 h-[200px] flex flex-col justify-between"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}
                 />
-                <h3 className="text-2xl font-semibold text-gray-900">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   {skill.name}
                 </h3>
-                <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div className="relative h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                   <div
                     className={`absolute inset-y-0 left-0 bg-gradient-to-r ${skill.color}`}
                     style={{ width: `${skill.level}%` }}
@@ -157,9 +160,9 @@ export default function AboutPage() {
       </div>
 
       {/* 时间线区域 */}
-      <div ref={timelineRef} className="py-20 px-4 bg-gray-50">
+      <div ref={timelineRef} className="py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
             职业经历
           </h2>
           <div className="space-y-6 md:space-y-8">
@@ -169,16 +172,16 @@ export default function AboutPage() {
                 className="timeline-item relative pl-6 md:pl-8 border-l-2 border-indigo-500"
               >
                 <div className="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full" />
-                <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 md:p-6 shadow-lg">
                   <div className="flex flex-col md:flex-row md:items-center md:gap-4">
-                    <span className="text-sm font-medium text-indigo-600">
+                    <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
                       {item.year}
                     </span>
-                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mt-1 md:mt-0">
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white mt-1 md:mt-0">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 mt-2 text-sm md:text-base">
+                  <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm md:text-base">
                     {item.description}
                   </p>
                 </div>

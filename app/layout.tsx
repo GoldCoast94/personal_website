@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="zh">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white/50 dark:bg-[#1e1e2f]/50 text-gray-900 dark:text-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-gray-900 dark:text-gray-100`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />

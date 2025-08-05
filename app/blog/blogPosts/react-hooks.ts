@@ -21,8 +21,8 @@ export const reactHooks = {
 
     <section id="useState" class="mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">1. useState</h2>
-      <div class="bg-gray-900 rounded-lg p-4 mb-4">
-        <pre class="text-gray-100"><code>function Counter() {
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
+        <pre class="text-gray-800 dark:text-gray-100"><code>function Counter() {
   const [count, setCount] = useState(0);
 
   return (
@@ -39,8 +39,8 @@ export const reactHooks = {
 
     <section id="useEffect" class="mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">2. useEffect</h2>
-      <div class="bg-gray-900 rounded-lg p-4 mb-4">
-        <pre class="text-gray-100"><code>function DataFetcher() {
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
+        <pre class="text-gray-800 dark:text-gray-100"><code>function DataFetcher() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ export const reactHooks = {
 
     <section id="useContext" class="mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">3. useContext</h2>
-      <div class="bg-gray-900 rounded-lg p-4 mb-4">
-        <pre class="text-gray-100"><code>const ThemeContext = React.createContext('light');
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
+        <pre class="text-gray-800 dark:text-gray-100"><code>const ThemeContext = React.createContext('light');
 
 function ThemedButton() {
   const theme = useContext(ThemeContext);
@@ -68,8 +68,8 @@ function ThemedButton() {
 
     <section id="useReducer" class="mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">4. useReducer</h2>
-      <div class="bg-gray-900 rounded-lg p-4 mb-4">
-        <pre class="text-gray-100"><code>function reducer(state, action) {
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
+        <pre class="text-gray-800 dark:text-gray-100"><code>function reducer(state, action) {
   switch (action.type) {
     case 'increment':
       return { count: state.count + 1 };
@@ -96,8 +96,8 @@ function Counter() {
 
     <section id="custom-hooks" class="mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">5. 自定义 Hooks</h2>
-      <div class="bg-gray-900 rounded-lg p-4 mb-4">
-        <pre class="text-gray-100"><code>function useWindowSize() {
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
+        <pre class="text-gray-800 dark:text-gray-100"><code>function useWindowSize() {
   const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
