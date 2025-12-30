@@ -101,6 +101,8 @@ export default function AboutPage() {
     },
   ];
 
+  if (!mounted) return null;
+
   return (
     <div
       ref={containerRef}
