@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "tech": "技術",
+    "blog": "ブログ",
+    "about": "について",
+    "brandName": "GoldCoast"
+  },
+  "home": {
+    "title": "私のブログへようこそ",
+    "subtitle": "テクノロジーを探求し、知識を共有する",
+    "description": "モダンな個人ブログウェブサイト",
+    "learnMore": "詳細を見る",
+    "slides": {
+      "react": {
+        "title": "Reactコア概念",
+        "description": "Reactのコア概念とベストプラクティスを深く理解する"
+      },
+      "css": {
+        "title": "CSSアニメーションとトランジション",
+        "description": "モダンなCSSアニメーションとトランジション効果を探索"
+      },
+      "javascript": {
+        "title": "JavaScript高度な機能",
+        "description": "JavaScriptの高度な機能とデザインパターンをマスター"
+      },
+      "threejs": {
+        "title": "Three.js 3D開発",
+        "description": "Three.jsで没入型3D体験を作成"
+      },
+      "gsap": {
+        "title": "GSAPアニメーションライブラリ",
+        "description": "GSAPでスムーズなアニメーションを作成"
+      }
+    }
+  },
+  "blog": {
+    "title": "ブログ記事",
+    "readTime": "読む時間",
+    "lastUpdated": "最終更新",
+    "notFound": "記事が見つかりません",
+    "loadError": "記事の読み込み中にエラーが発生しました"
+  },
+  "about": {
+    "title": "私について",
+    "subtitle": "技術を愛し、革新を追求し、優れたユーザーエクスペリエンスの創造に専念しています",
+    "skills": "専門スキル",
+    "timeline": "キャリアタイムライン",
+    "positions": {
+      "fullstack": "フルスタック開発者",
+      "frontend": "フロントエンド開発者",
+      "junior": "ジュニア開発者"
+    },
+    "descriptions": {
+      "fullstack": "モダンなWebアプリケーション開発に注力",
+      "frontend": "複数の大規模プロジェクトのフロントエンド開発を担当",
+      "junior": "Web開発の旅を始めました"
+    }
+  },
+  "tech": {
+    "title": "技術スタック",
+    "subtitle": "私が使用している技術とツールを探索",
+    "viewDetails": "詳細を見る",
+    "categories": {
+      "react": {
+        "name": "React",
+        "description": "ユーザーインターフェースを構築するためのJavaScriptライブラリ"
+      },
+      "css": {
+        "name": "CSS",
+        "description": "Webスタイルをデザインするためのカスケーディングスタイルシート"
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "description": "軽量なインタープリタ型プログラミング言語"
+      },
+      "threejs": {
+        "name": "Three.js",
+        "description": "3Dグラフィックスを作成および表示するためのJavaScript 3Dライブラリ"
+      },
+      "gsap": {
+        "name": "GSAP",
+        "description": "プロフェッショナルなJavaScriptアニメーションライブラリ"
+      }
+    }
+  }
+}

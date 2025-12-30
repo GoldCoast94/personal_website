@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { reactHooks } from "./blogPosts/react-hooks";
-import { nextjs13 } from "./blogPosts/nextjs-13";
-import { typescriptAdvanced } from "./blogPosts/typescript-advanced";
-import { reactPerformance } from "./blogPosts/react-performance";
+import { useTranslations, useLocale } from "next-intl";
+import { reactHooks } from "@/app/[locale]/blog/blogPosts/react-hooks";
+import { nextjs13 } from "@/app/[locale]/blog/blogPosts/nextjs-13";
+import { typescriptAdvanced } from "@/app/[locale]/blog/blogPosts/typescript-advanced";
+import { reactPerformance } from "@/app/[locale]/blog/blogPosts/react-performance";
 
 interface BlogPost {
   slug: string;
@@ -35,17 +36,20 @@ const gradientBackgrounds = {
 };
 
 export default function BlogPage() {
+  const t = useTranslations("blog");
+  const locale = useLocale();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
-          博客文章
+          {t("title")}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
             <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={`/${locale}/blog/${post.slug}`}
               className="group relative block rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden bg-white dark:bg-gray-800"
             >
               {/* 渐变背景 */}

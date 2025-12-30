@@ -1,46 +1,39 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 const slides = [
   {
     id: "react",
-    title: "React 核心概念",
-    description: "深入理解 React 的核心概念和最佳实践",
     icon: "⚛️",
     color: "from-blue-500 to-cyan-500",
   },
   {
     id: "css",
-    title: "CSS 动画与过渡",
-    description: "探索现代 CSS 动画和过渡效果的实现",
     icon: "🎨",
     color: "from-pink-500 to-purple-500",
   },
   {
     id: "javascript",
-    title: "JavaScript 高级特性",
-    description: "掌握 JavaScript 的高级特性和设计模式",
     icon: "📜",
     color: "from-yellow-500 to-orange-500",
   },
   {
     id: "threejs",
-    title: "Three.js 3D 开发",
-    description: "使用 Three.js 创建沉浸式 3D 体验",
     icon: "🎮",
     color: "from-green-500 to-emerald-500",
   },
   {
     id: "gsap",
-    title: "GSAP 动画库",
-    description: "使用 GSAP 创建流畅的动画效果",
     icon: "✨",
     color: "from-indigo-500 to-violet-500",
   },
 ];
 
 export default function HomeCarousel() {
+  const t = useTranslations("home");
+  const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -74,7 +67,7 @@ export default function HomeCarousel() {
 
   return (
     <div
-      className="relative w-full h-[600px] overflow-hidden"
+      className="relative w-full h-screen overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -92,16 +85,16 @@ export default function HomeCarousel() {
                 {slides[currentSlide].icon}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                {slides[currentSlide].title}
+                {t(`slides.${slides[currentSlide].id}.title`)}
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
-                {slides[currentSlide].description}
+                {t(`slides.${slides[currentSlide].id}.description`)}
               </p>
               <Link
-                href={`/tech/${slides[currentSlide].id}`}
+                href={`/${locale}/tech/${slides[currentSlide].id}`}
                 className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors duration-200"
               >
-                了解更多
+                {t("learnMore")}
                 <svg
                   className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"

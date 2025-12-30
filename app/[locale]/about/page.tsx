@@ -3,18 +3,23 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 export default function AboutPage() {
+  const t = useTranslations("about");
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [hasBackgroundImage, setHasBackgroundImage] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     // 检查背景图片是否存在
     const img = new Image();
     img.onload = () => setHasBackgroundImage(true);
@@ -25,7 +30,7 @@ export default function AboutPage() {
       // 标题打字机效果
       gsap.to(titleRef.current, {
         duration: 2,
-        text: "关于我",
+        text: t("title"),
         ease: "none",
       });
 
@@ -81,18 +86,18 @@ export default function AboutPage() {
   const timeline = [
     {
       year: "2024",
-      title: "全栈开发工程师",
-      description: "专注于现代 Web 应用开发",
+      title: t("positions.fullstack"),
+      description: t("descriptions.fullstack"),
     },
     {
       year: "2023",
-      title: "前端开发工程师",
-      description: "负责多个大型项目的前端开发",
+      title: t("positions.frontend"),
+      description: t("descriptions.frontend"),
     },
     {
       year: "2022",
-      title: "初级开发工程师",
-      description: "开始 Web 开发之旅",
+      title: t("positions.junior"),
+      description: t("descriptions.junior"),
     },
   ];
 
@@ -124,7 +129,7 @@ export default function AboutPage() {
             ref={descriptionRef}
             className="text-xl text-gray-100 max-w-2xl mx-auto"
           >
-            热爱技术，追求创新，致力于创造优秀的用户体验
+            {t("subtitle")}
           </p>
         </div>
       </div>
@@ -133,7 +138,7 @@ export default function AboutPage() {
       <div ref={skillsRef} className="py-20 px-4 bg-white dark:bg-gray-800">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-            专业技能
+            {t("skills")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skill) => (
@@ -163,7 +168,7 @@ export default function AboutPage() {
       <div ref={timelineRef} className="py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-            职业经历
+            {t("timeline")}
           </h2>
           <div className="space-y-6 md:space-y-8">
             {timeline.map((item) => (

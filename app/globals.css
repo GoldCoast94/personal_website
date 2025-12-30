@@ -4,10 +4,11 @@
 
 /* 默认（light）主题变量 */
 html {
-  --background: #ffffff;
+  --background: #f5f5f5;
   --foreground: #171717;
   color: var(--foreground);
-  transition: color 0.3s ease;
+  background: var(--background);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* dark 模式变量 */
@@ -15,13 +16,15 @@ html.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   color: var(--foreground);
+  background: var(--background);
 }
 
 /* light 模式显式支持（可选） */
 html.light {
-  --background: #ffffff;
+  --background: #f5f5f5;
   --foreground: #171717;
   color: var(--foreground);
+  background: var(--background);
 }
 
 body {

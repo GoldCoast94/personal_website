@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "首页",
+    "tech": "技术",
+    "blog": "博客",
+    "about": "关于",
+    "brandName": "GoldCoast"
+  },
+  "home": {
+    "title": "欢迎来到我的博客",
+    "subtitle": "探索技术，分享知识",
+    "description": "这是一个现代化的个人博客网站",
+    "learnMore": "了解更多",
+    "slides": {
+      "react": {
+        "title": "React 核心概念",
+        "description": "深入理解 React 的核心概念和最佳实践"
+      },
+      "css": {
+        "title": "CSS 动画与过渡",
+        "description": "探索现代 CSS 动画和过渡效果的实现"
+      },
+      "javascript": {
+        "title": "JavaScript 高级特性",
+        "description": "掌握 JavaScript 的高级特性和设计模式"
+      },
+      "threejs": {
+        "title": "Three.js 3D 开发",
+        "description": "使用 Three.js 创建沉浸式 3D 体验"
+      },
+      "gsap": {
+        "title": "GSAP 动画库",
+        "description": "使用 GSAP 创建流畅的动画效果"
+      }
+    }
+  },
+  "blog": {
+    "title": "博客文章",
+    "readTime": "阅读时间",
+    "lastUpdated": "最后更新于",
+    "notFound": "文章未找到",
+    "loadError": "加载文章时出错"
+  },
+  "about": {
+    "title": "关于我",
+    "subtitle": "热爱技术，追求创新，致力于创造优秀的用户体验",
+    "skills": "专业技能",
+    "timeline": "职业经历",
+    "positions": {
+      "fullstack": "全栈开发工程师",
+      "frontend": "前端开发工程师",
+      "junior": "初级开发工程师"
+    },
+    "descriptions": {
+      "fullstack": "专注于现代 Web 应用开发",
+      "frontend": "负责多个大型项目的前端开发",
+      "junior": "开始 Web 开发之旅"
+    }
+  },
+  "tech": {
+    "title": "技术栈",
+    "subtitle": "探索我使用的技术和工具",
+    "viewDetails": "查看详情",
+    "categories": {
+      "react": {
+        "name": "React",
+        "description": "用于构建用户界面的 JavaScript 库"
+      },
+      "css": {
+        "name": "CSS",
+        "description": "层叠样式表，用于设计网页样式"
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "description": "轻量级的解释型编程语言"
+      },
+      "threejs": {
+        "name": "Three.js",
+        "description": "JavaScript 3D 库，用于创建和显示三维图形"
+      },
+      "gsap": {
+        "name": "GSAP",
+        "description": "专业的 JavaScript 动画库"
+      }
+    }
+  }
+}

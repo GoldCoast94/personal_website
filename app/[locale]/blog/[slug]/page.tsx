@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
-import { reactHooks } from "@/app/blog/blogPosts/react-hooks";
-import { nextjs13 } from "@/app/blog/blogPosts/nextjs-13";
-import { reactPerformance } from "@/app/blog/blogPosts/react-performance";
-import { typescriptAdvanced } from "@/app/blog/blogPosts/typescript-advanced";
-import type { BlogPost } from "@/app/blog/blogPosts/types";
+import { useTranslations } from "next-intl";
+import { reactHooks } from "@/app/[locale]/blog/blogPosts/react-hooks";
+import { nextjs13 } from "@/app/[locale]/blog/blogPosts/nextjs-13";
+import { reactPerformance } from "@/app/[locale]/blog/blogPosts/react-performance";
+import { typescriptAdvanced } from "@/app/[locale]/blog/blogPosts/typescript-advanced";
+import type { BlogPost } from "@/app/[locale]/blog/blogPosts/types";
 
 const blogPosts: BlogPost[] = [
   reactHooks,
@@ -15,6 +16,7 @@ const blogPosts: BlogPost[] = [
 ];
 
 export default function BlogPostPage() {
+  const t = useTranslations("blog");
   const params = useParams();
   const slug = params.slug as string;
 
@@ -29,7 +31,7 @@ export default function BlogPostPage() {
       return (
         <div className="min-h-screen flex items-center justify-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            文章未找到
+            {t("notFound")}
           </h1>
         </div>
       );
@@ -101,7 +103,7 @@ export default function BlogPostPage() {
           <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                最后更新于 {post.date}
+                {t("lastUpdated")} {post.date}
               </div>
               <div className="flex items-center gap-4">
                 <button className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
@@ -145,7 +147,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          加载文章时出错
+          {t("loadError")}
         </h1>
       </div>
     );

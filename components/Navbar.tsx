@@ -2,22 +2,36 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, useCallback } from "react";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Navbar() {
+  const t = useTranslations("nav");
   const [activeIndex, setActiveIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const isTechPage = pathname.startsWith("/tech");
+  const isTechPage = pathname.includes("/tech");
+
+  // 从路径中提取语言代码
+  const getLocaleFromPath = () => {
+    const pathSegments = pathname.split("/");
+    return pathSegments[1] && ["zh", "en", "ja"].includes(pathSegments[1])
+      ? pathSegments[1]
+      : "zh";
+  };
+
+  const locale = getLocaleFromPath();
 
   const isActive = useCallback(
     (path: string) => {
+      const cleanPath = pathname.replace(`/${locale}`, "") || "/";
       if (path === "/tech") return isTechPage;
-      return pathname === path;
+      return cleanPath === path;
     },
-    [pathname, isTechPage]
+    [pathname, isTechPage, locale]
   );
 
   useEffect(() => {
@@ -48,14 +62,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link
-              href="/"
+              href={`/${locale}`}
               className={`text-lg font-semibold transition-colors duration-300 ease-in-out ${
                 isActive("/")
                   ? "text-indigo-600 dark:text-indigo-400"
                   : "text-gray-900 dark:text-gray-100 hover:text-indigo-500 dark:hover:text-indigo-400"
               }`}
             >
-              GoldCoast
+              {t("brandName")}
             </Link>
           </div>
 
@@ -65,44 +79,44 @@ export default function Navbar() {
             ref={navRef}
           >
             <Link
-              href="/"
+              href={`/${locale}`}
               className={`text-lg font-semibold relative transition-colors duration-300 ease-in-out ${
                 isActive("/")
                   ? "text-indigo-600 dark:text-indigo-400"
                   : "text-gray-900 dark:text-gray-100 hover:text-indigo-500 dark:hover:text-indigo-400"
               }`}
             >
-              首页
+              {t("home")}
             </Link>
             <Link
-              href="/tech"
+              href={`/${locale}/tech`}
               className={`text-lg font-semibold relative transition-colors duration-300 ease-in-out ${
                 isActive("/tech")
                   ? "text-indigo-600 dark:text-indigo-400"
                   : "text-gray-900 dark:text-gray-100 hover:text-indigo-500 dark:hover:text-indigo-400"
               }`}
             >
-              技术
+              {t("tech")}
             </Link>
             <Link
-              href="/blog"
+              href={`/${locale}/blog`}
               className={`text-lg font-semibold relative transition-colors duration-300 ease-in-out ${
                 isActive("/blog")
                   ? "text-indigo-600 dark:text-indigo-400"
                   : "text-gray-900 dark:text-gray-100 hover:text-indigo-500 dark:hover:text-indigo-400"
               }`}
             >
-              博客
+              {t("blog")}
             </Link>
             <Link
-              href="/about"
+              href={`/${locale}/about`}
               className={`text-lg font-semibold relative transition-colors duration-300 ease-in-out ${
                 isActive("/about")
                   ? "text-indigo-600 dark:text-indigo-400"
                   : "text-gray-900 dark:text-gray-100 hover:text-indigo-500 dark:hover:text-indigo-400"
               }`}
             >
-              关于
+              {t("about")}
             </Link>
             <div
               className="absolute bottom-0 left-0 h-0.5 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 ease-in-out"
@@ -110,8 +124,9 @@ export default function Navbar() {
             />
           </div>
 
-          {/* Mobile Menu Button and Theme Toggle */}
-          <div className="flex items-center space-x-4">
+          {/* Mobile Menu Button, Language Toggle and Theme Toggle */}
+          <div className="flex items-center space-x-2">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -160,7 +175,7 @@ export default function Navbar() {
         >
           <div className="py-2 space-y-1">
             <Link
-              href="/"
+              href={`/${locale}`}
               onClick={() => setIsMenuOpen(false)}
               className={`block px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
                 isActive("/")
@@ -168,10 +183,10 @@ export default function Navbar() {
                   : ""
               }`}
             >
-              首页
+              {t("home")}
             </Link>
             <Link
-              href="/tech"
+              href={`/${locale}/tech`}
               onClick={() => setIsMenuOpen(false)}
               className={`block px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
                 isActive("/tech")
@@ -179,10 +194,10 @@ export default function Navbar() {
                   : ""
               }`}
             >
-              技术
+              {t("tech")}
             </Link>
             <Link
-              href="/blog"
+              href={`/${locale}/blog`}
               onClick={() => setIsMenuOpen(false)}
               className={`block px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
                 isActive("/blog")
@@ -190,10 +205,10 @@ export default function Navbar() {
                   : ""
               }`}
             >
-              博客
+              {t("blog")}
             </Link>
             <Link
-              href="/about"
+              href={`/${locale}/about`}
               onClick={() => setIsMenuOpen(false)}
               className={`block px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
                 isActive("/about")
@@ -201,7 +216,7 @@ export default function Navbar() {
                   : ""
               }`}
             >
-              关于
+              {t("about")}
             </Link>
           </div>
         </div>

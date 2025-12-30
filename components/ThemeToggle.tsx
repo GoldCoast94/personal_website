@@ -23,10 +23,13 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       className={`
         p-2 rounded-lg transition-all duration-300
-        bg-gray-100 dark:bg-gray-800
-        hover:bg-gray-200 dark:hover:bg-gray-700
+        bg-white dark:bg-gray-800
+        hover:bg-gray-50 dark:hover:bg-gray-700
+        border-2 border-gray-300 dark:border-gray-600
         text-gray-800 dark:text-gray-200
-        focus:outline-none cursor-pointer
+        shadow-sm hover:shadow-md
+        focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500
+        cursor-pointer
       `}
       aria-label="Toggle theme"
     >

@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Home",
+    "tech": "Tech",
+    "blog": "Blog",
+    "about": "About",
+    "brandName": "GoldCoast"
+  },
+  "home": {
+    "title": "Welcome to My Blog",
+    "subtitle": "Explore Technology, Share Knowledge",
+    "description": "A modern personal blog website",
+    "learnMore": "Learn More",
+    "slides": {
+      "react": {
+        "title": "React Core Concepts",
+        "description": "Deep dive into React core concepts and best practices"
+      },
+      "css": {
+        "title": "CSS Animations & Transitions",
+        "description": "Explore modern CSS animations and transition effects"
+      },
+      "javascript": {
+        "title": "Advanced JavaScript Features",
+        "description": "Master advanced JavaScript features and design patterns"
+      },
+      "threejs": {
+        "title": "Three.js 3D Development",
+        "description": "Create immersive 3D experiences with Three.js"
+      },
+      "gsap": {
+        "title": "GSAP Animation Library",
+        "description": "Create smooth animations with GSAP"
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog Posts",
+    "readTime": "Read Time",
+    "lastUpdated": "Last updated on",
+    "notFound": "Article not found",
+    "loadError": "Error loading article"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Passionate about technology, pursuing innovation, dedicated to creating excellent user experiences",
+    "skills": "Professional Skills",
+    "timeline": "Career Timeline",
+    "positions": {
+      "fullstack": "Full Stack Developer",
+      "frontend": "Frontend Developer",
+      "junior": "Junior Developer"
+    },
+    "descriptions": {
+      "fullstack": "Focusing on modern web application development",
+      "frontend": "Responsible for frontend development of multiple large projects",
+      "junior": "Started my web development journey"
+    }
+  },
+  "tech": {
+    "title": "Tech Stack",
+    "subtitle": "Explore the technologies and tools I use",
+    "viewDetails": "View Details",
+    "categories": {
+      "react": {
+        "name": "React",
+        "description": "A JavaScript library for building user interfaces"
+      },
+      "css": {
+        "name": "CSS",
+        "description": "Cascading Style Sheets for designing web styles"
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "description": "Lightweight interpreted programming language"
+      },
+      "threejs": {
+        "name": "Three.js",
+        "description": "JavaScript 3D library for creating and displaying 3D graphics"
+      },
+      "gsap": {
+        "name": "GSAP",
+        "description": "Professional JavaScript animation library"
+      }
+    }
+  }
+}
