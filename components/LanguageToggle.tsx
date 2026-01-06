@@ -1,5 +1,6 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 const languages = [
@@ -11,41 +12,23 @@ const languages = [
 export default function LanguageToggle() {
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
-  const [currentLang, setCurrentLang] = useState("zh");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // 从路径中提取当前语言
-    const pathLang = pathname.split("/")[1];
-    if (["zh", "en", "ja"].includes(pathLang)) {
-      setCurrentLang(pathLang);
-    } else {
-      setCurrentLang("zh");
-    }
-  }, [pathname]);
+  }, []);
 
   if (!mounted) return null;
 
   const handleLanguageChange = (langCode: string) => {
-    // 移除当前语言前缀
-    const currentPathLang = pathname.split("/")[1];
-    let newPath = pathname;
-
-    if (["zh", "en", "ja"].includes(currentPathLang)) {
-      // 如果路径包含语言前缀，替换它
-      newPath = pathname.replace(`/${currentPathLang}`, `/${langCode}`);
-    } else {
-      // 如果路径不包含语言前缀，添加它
-      newPath = `/${langCode}${pathname}`;
-    }
-
     setIsOpen(false);
-    router.push(newPath);
+    // 使用 next-intl 的 router.replace，它会自动处理语言前缀
+    router.replace(pathname, { locale: langCode });
   };
 
-  const currentLanguage = languages.find((lang) => lang.code === currentLang) || languages[0];
+  const currentLanguage = languages.find((lang) => lang.code === locale) || languages[0];
 
   return (
     <div className="relative">
@@ -99,7 +82,7 @@ export default function LanguageToggle() {
                   w-full px-4 py-2 text-left flex items-center space-x-2
                   transition-colors duration-200
                   ${
-                    currentLang === lang.code
+                    locale === lang.code
                       ? "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200"
                       : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                   }
