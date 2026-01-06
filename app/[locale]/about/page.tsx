@@ -106,7 +106,7 @@ export default function AboutPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-gray-50 dark:bg-gray-900"
+      className="h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
     >
       {/* 头部区域 */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -137,24 +137,24 @@ export default function AboutPage() {
       </div>
 
       {/* 技能区域 */}
-      <div ref={skillsRef} className="py-20 px-4 bg-white dark:bg-gray-800">
+      <div ref={skillsRef} className="py-12 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center">
             {t("skills")}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {skills.map((skill) => (
               <div
                 key={skill.name}
-                className="skill-card group relative bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 h-[200px] flex flex-col justify-between"
+                className="skill-card group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg p-6 md:p-8 hover:shadow-xl transition-all duration-300 h-[180px] md:h-[200px] flex flex-col justify-between"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}
                 />
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white relative z-10">
                   {skill.name}
                 </h3>
-                <div className="relative h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                <div className="relative h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden z-10">
                   <div
                     className={`absolute inset-y-0 left-0 bg-gradient-to-r ${skill.color}`}
                     style={{ width: `${skill.level}%` }}
@@ -167,19 +167,19 @@ export default function AboutPage() {
       </div>
 
       {/* 时间线区域 */}
-      <div ref={timelineRef} className="py-20 px-4 bg-gray-50 dark:bg-gray-900">
+      <div ref={timelineRef} className="py-12 md:py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center">
             {t("timeline")}
           </h2>
-          <div className="space-y-6 md:space-y-8">
+          <div className="space-y-4 md:space-y-6">
             {timeline.map((item) => (
               <div
                 key={item.year}
                 className="timeline-item relative pl-6 md:pl-8 border-l-2 border-indigo-500"
               >
                 <div className="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full" />
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 md:p-6 shadow-lg">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg">
                   <div className="flex flex-col md:flex-row md:items-center md:gap-4">
                     <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
                       {item.year}
@@ -188,7 +188,7 @@ export default function AboutPage() {
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm md:text-base">
+                  <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm md:text-base">
                     {item.description}
                   </p>
                 </div>

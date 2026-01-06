@@ -8,6 +8,7 @@ import { AirpodsAnimation, ScrollAnimation } from "@/components/Gsap";
 import { Modal } from "@/components/Gsap/Modal";
 import { CodeBlock } from "@/components/Gsap/CodeBlock";
 import { TimelineAnimation } from "@/components/Gsap/TimelineAnimation";
+import { RotatingCube, ParticleSystem, Earth3D } from "@/components/ThreeJS";
 
 interface Example {
   id: string;
@@ -41,6 +42,33 @@ const examples: Example[] = [
       "使用 ScrollTrigger 创建滚动触发的动画效果，为页面添加动态的视觉元素。通过滚动位置触发不同的动画状态。",
     icon: "📜",
     tags: ["ScrollTrigger", "滚动动画", "视差效果"],
+  },
+];
+
+const threejsExamples: Example[] = [
+  {
+    id: "rotating-cube",
+    title: "旋转立方体",
+    description:
+      "Three.js 基础示例，展示如何创建一个带有光照效果的 3D 立方体，并添加平滑的旋转动画。这是学习 Three.js 的第一步。",
+    icon: "🎲",
+    tags: ["基础", "几何体", "动画"],
+  },
+  {
+    id: "particle-system",
+    title: "粒子系统",
+    description:
+      "创建一个动态的粒子系统，包含数千个粒子的运动和交互。展示 Three.js 在处理大量对象时的性能优化技巧。",
+    icon: "✨",
+    tags: ["粒子", "性能优化", "视觉效果"],
+  },
+  {
+    id: "earth-3d",
+    title: "3D 地球",
+    description:
+      "使用着色器创建一个逼真的 3D 地球模型，包含大气层效果、星空背景和鼠标交互。展示 Three.js 的高级渲染能力。",
+    icon: "🌍",
+    tags: ["着色器", "交互", "高级渲染"],
   },
 ];
 
@@ -546,6 +574,256 @@ export default function TechDetailPage() {
 
         {techId === "css" && <CSSCaseStudies />}
         {techId === "react" && <ReactExamples />}
+        {techId === "threejs" && (
+          <>
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                案例展示
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {threejsExamples.map((example) => (
+                  <div
+                    key={example.id}
+                    className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  >
+                    <div className="relative h-48 bg-gray-100 dark:bg-gray-700">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-4xl">{example.icon}</div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                        {example.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        {example.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {example.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => setSelectedExample(example.id)}
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                      >
+                        查看演示
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Three.js Modals */}
+              <Modal
+                isOpen={selectedExample === "rotating-cube"}
+                onClose={() => setSelectedExample(null)}
+                title="旋转立方体"
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      功能说明
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      这是一个 Three.js 的基础示例，展示了如何创建场景、相机、渲染器、几何体和光源。
+                      立方体会持续旋转，并带有青色的边缘线条。
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      在线演示
+                    </h4>
+                    <div className="relative h-[500px] bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
+                      <RotatingCube />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      核心代码
+                    </h4>
+                    <CodeBlock
+                      code={`// 创建场景
+const scene = new THREE.Scene();
+
+// 创建相机
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+camera.position.z = 5;
+
+// 创建渲染器
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(width, height);
+
+// 创建立方体
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const material = new THREE.MeshStandardMaterial({
+  color: 0x6366f1,
+  metalness: 0.5,
+  roughness: 0.5
+});
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+// 添加光源
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+// 动画循环
+function animate() {
+  requestAnimationFrame(animate);
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  renderer.render(scene, camera);
+}
+animate();`}
+                    />
+                  </div>
+                </div>
+              </Modal>
+
+              <Modal
+                isOpen={selectedExample === "particle-system"}
+                onClose={() => setSelectedExample(null)}
+                title="粒子系统"
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      功能说明
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      这个示例创建了一个包含 5000 个粒子的动态系统。
+                      每个粒子都有独立的运动轨迹和颜色渐变，整个系统会缓慢旋转，创造出迷幻的视觉效果。
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      在线演示
+                    </h4>
+                    <div className="relative h-[500px] bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
+                      <ParticleSystem />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      核心代码
+                    </h4>
+                    <CodeBlock
+                      code={`// 创建粒子
+const particleCount = 5000;
+const particles = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+
+for (let i = 0; i < particleCount; i++) {
+  // 随机位置
+  positions[i * 3] = (Math.random() - 0.5) * 100;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+
+  // 渐变颜色 (蓝色到紫色)
+  const colorMix = Math.random();
+  colors[i * 3] = 0.4 + colorMix * 0.6;
+  colors[i * 3 + 1] = 0.2 + colorMix * 0.4;
+  colors[i * 3 + 2] = 0.8 + colorMix * 0.2;
+}
+
+particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+// 创建材质和粒子系统
+const material = new THREE.PointsMaterial({
+  size: 0.5,
+  vertexColors: true,
+  blending: THREE.AdditiveBlending
+});
+
+const particleSystem = new THREE.Points(particles, material);
+scene.add(particleSystem);`}
+                    />
+                  </div>
+                </div>
+              </Modal>
+
+              <Modal
+                isOpen={selectedExample === "earth-3d"}
+                onClose={() => setSelectedExample(null)}
+                title="3D 地球"
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      功能说明
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      这个示例使用 Three.js 的着色器功能创建了一个逼真的 3D 地球模型。
+                      包含陆地和海洋的纹理、大气层光晕效果、星空背景，以及鼠标交互控制地球的旋转。
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      在线演示
+                    </h4>
+                    <div className="relative h-[500px] bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
+                      <Earth3D />
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                      提示：移动鼠标可以控制地球的角度
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      着色器代码
+                    </h4>
+                    <CodeBlock
+                      code={`// 创建自定义着色器材质
+const material = new THREE.ShaderMaterial({
+  uniforms: {
+    time: { value: 0 }
+  },
+  vertexShader: \`
+    varying vec2 vUv;
+    varying vec3 vNormal;
+
+    void main() {
+      vUv = uv;
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  \`,
+  fragmentShader: \`
+    uniform float time;
+    varying vec2 vUv;
+    varying vec3 vNormal;
+
+    void main() {
+      vec3 oceanColor = vec3(0.1, 0.3, 0.8);
+      vec3 landColor = vec3(0.2, 0.6, 0.3);
+
+      // 使用噪声模拟陆地和海洋
+      float noise = sin(vUv.x * 10.0 + time) * cos(vUv.y * 10.0);
+      vec3 baseColor = mix(oceanColor, landColor, step(0.5, noise));
+
+      // 添加光照
+      vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
+      float diff = max(dot(vNormal, lightDir), 0.0);
+
+      gl_FragColor = vec4(baseColor * diff, 1.0);
+    }
+  \`
+});`}
+                    />
+                  </div>
+                </div>
+              </Modal>
+            </div>
+          </>
+        )}
         {techId === "gsap" && (
           <>
             <div className="mt-12">

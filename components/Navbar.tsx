@@ -125,12 +125,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button, Language Toggle and Theme Toggle */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <LanguageToggle />
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className="md:hidden h-10 w-10 flex items-center justify-center rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
             >
               {isMenuOpen ? (
                 <svg

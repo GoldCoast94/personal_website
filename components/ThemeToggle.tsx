@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className={`
-        p-2 rounded-lg transition-all duration-300
+        h-10 w-10 rounded-lg transition-all duration-300
         bg-white dark:bg-gray-800
         hover:bg-gray-50 dark:hover:bg-gray-700
         border-2 border-gray-300 dark:border-gray-600
@@ -30,6 +30,7 @@ export default function ThemeToggle() {
         shadow-sm hover:shadow-md
         focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500
         cursor-pointer
+        flex items-center justify-center
       `}
       aria-label="Toggle theme"
     >

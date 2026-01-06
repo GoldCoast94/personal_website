@@ -39,7 +39,29 @@
     "readTime": "阅读时间",
     "lastUpdated": "最后更新于",
     "notFound": "文章未找到",
-    "loadError": "加载文章时出错"
+    "loadError": "加载文章时出错",
+    "posts": {
+      "react-hooks": {
+        "title": "React Hooks 深度解析",
+        "readTime": "15 分钟",
+        "tags": ["React", "Hooks", "前端开发"]
+      },
+      "nextjs-15": {
+        "title": "Next.js 15 新特性详解",
+        "readTime": "20 分钟",
+        "tags": ["Next.js", "React", "全栈开发"]
+      },
+      "typescript-advanced": {
+        "title": "TypeScript 高级类型详解",
+        "readTime": "18 分钟",
+        "tags": ["TypeScript", "类型系统", "前端开发"]
+      },
+      "react-performance": {
+        "title": "React 性能优化实战",
+        "readTime": "22 分钟",
+        "tags": ["React", "性能优化", "最佳实践"]
+      }
+    }
   },
   "about": {
     "title": "关于我",

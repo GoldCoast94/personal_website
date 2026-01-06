@@ -52,7 +52,7 @@ export default function LanguageToggle() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          p-2 rounded-lg transition-all duration-300
+          h-10 px-2 rounded-lg transition-all duration-300
           bg-white dark:bg-gray-800
           hover:bg-gray-50 dark:hover:bg-gray-700
           border-2 border-gray-300 dark:border-gray-600
@@ -60,7 +60,7 @@ export default function LanguageToggle() {
           shadow-sm hover:shadow-md
           focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500
           cursor-pointer
-          flex items-center space-x-1
+          flex items-center justify-center space-x-1
         `}
         aria-label="Toggle language"
       >

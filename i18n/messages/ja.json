@@ -39,7 +39,29 @@
     "readTime": "読む時間",
     "lastUpdated": "最終更新",
     "notFound": "記事が見つかりません",
-    "loadError": "記事の読み込み中にエラーが発生しました"
+    "loadError": "記事の読み込み中にエラーが発生しました",
+    "posts": {
+      "react-hooks": {
+        "title": "React Hooks 詳細解説",
+        "readTime": "15分で読む",
+        "tags": ["React", "Hooks", "フロントエンド"]
+      },
+      "nextjs-15": {
+        "title": "Next.js 15 新機能",
+        "readTime": "20分で読む",
+        "tags": ["Next.js", "React", "フルスタック"]
+      },
+      "typescript-advanced": {
+        "title": "TypeScript 高度な型",
+        "readTime": "18分で読む",
+        "tags": ["TypeScript", "型システム", "フロントエンド"]
+      },
+      "react-performance": {
+        "title": "React パフォーマンス最適化",
+        "readTime": "22分で読む",
+        "tags": ["React", "パフォーマンス", "ベストプラクティス"]
+      }
+    }
   },
   "about": {
     "title": "私について",

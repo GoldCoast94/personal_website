@@ -15,11 +15,16 @@ const urls = new Array(frameCount)
         .padStart(4, "0")}.jpg`
   );
 
+// 全局图片缓存，避免重复加载
+const imageCache = new Map<string, HTMLImageElement>();
+let isPreloading = false;
+
 export const AirpodsAnimation: React.FC = () => {
   const modalCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -47,39 +52,80 @@ export const AirpodsAnimation: React.FC = () => {
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
 
-  // 加载图片
-  useEffect(() => {
-    const loadImages = async () => {
-      setIsLoading(true);
-      setError(null);
-      const images: HTMLImageElement[] = [];
-      let loadedCount = 0;
+  // 预加载图片函数
+  const preloadImages = async () => {
+    if (isPreloading) return; // 防止重复加载
 
-      for (let i = 0; i < frameCount; i++) {
-        try {
-          const img = new window.Image();
-          img.src = urls[i];
-          await new Promise((resolve, reject) => {
-            img.onload = resolve;
-            img.onerror = reject;
-          });
-          images.push(img);
-          loadedCount++;
-          if (loadedCount === frameCount) {
-            imagesRef.current = images;
-            setIsLoading(false);
+    // 检查是否已经全部缓存
+    if (imageCache.size === frameCount) {
+      const cachedImages = urls.map((url) => imageCache.get(url)!);
+      imagesRef.current = cachedImages;
+      setIsLoading(false);
+      return;
+    }
+
+    isPreloading = true;
+    setIsLoading(true);
+    setError(null);
+    const images: HTMLImageElement[] = [];
+
+    try {
+      // 使用 Promise.all 并发加载，提高加载速度
+      const loadPromises = urls.map((url, i) => {
+        return new Promise<HTMLImageElement>((resolve, reject) => {
+          // 先检查缓存
+          if (imageCache.has(url)) {
+            resolve(imageCache.get(url)!);
+            return;
           }
-        } catch (error) {
-          console.error(`Error loading image ${i + 1}:`, error);
-          setError("加载图片失败");
-          setIsLoading(false);
-          return;
-        }
-      }
-    };
 
-    loadImages();
+          const img = new window.Image();
+          // 设置 crossOrigin 以支持浏览器缓存
+          img.crossOrigin = "anonymous";
+          img.src = url;
+
+          img.onload = () => {
+            imageCache.set(url, img); // 缓存图片
+            setLoadProgress(Math.round(((i + 1) / frameCount) * 100));
+            resolve(img);
+          };
+          img.onerror = () => reject(new Error(`Failed to load image ${i + 1}`));
+        });
+      });
+
+      images.push(...(await Promise.all(loadPromises)));
+      imagesRef.current = images;
+      setIsLoading(false);
+      isPreloading = false;
+    } catch (error) {
+      console.error("Error loading images:", error);
+      setError("加载图片失败，请刷新重试");
+      setIsLoading(false);
+      isPreloading = false;
+    }
+  };
+
+  // 组件挂载时预加载第一帧，打开弹窗时加载全部
+  useEffect(() => {
+    // 预加载第一帧用于预览
+    if (!imageCache.has(urls[0])) {
+      const img = new window.Image();
+      img.crossOrigin = "anonymous";
+      img.src = urls[0];
+      img.onload = () => imageCache.set(urls[0], img);
+    }
   }, []);
+
+  // 打开弹窗时才开始加载全部图片
+  useEffect(() => {
+    if (isOpen && imageCache.size < frameCount) {
+      preloadImages();
+    } else if (isOpen && imageCache.size === frameCount) {
+      // 如果已经全部缓存，直接使用缓存
+      const cachedImages = urls.map((url) => imageCache.get(url)!);
+      imagesRef.current = cachedImages;
+    }
+  }, [isOpen]);
 
   // 弹窗动画
   useEffect(() => {
@@ -173,12 +219,18 @@ export const AirpodsAnimation: React.FC = () => {
                 onWheel={handleWheel}
               >
                 {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black z-20">
                     <CometLoading />
+                    <div className="mt-4 text-white">
+                      加载中... {loadProgress}%
+                    </div>
+                    <div className="mt-2 text-gray-400 text-sm">
+                      {imageCache.size > 0 ? "使用缓存加速加载" : "首次加载"}
+                    </div>
                   </div>
                 )}
                 {error && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black z-20">
                     <div className="text-red-400">{error}</div>
                   </div>
                 )}

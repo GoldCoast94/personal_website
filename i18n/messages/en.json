@@ -39,7 +39,29 @@
     "readTime": "Read Time",
     "lastUpdated": "Last updated on",
     "notFound": "Article not found",
-    "loadError": "Error loading article"
+    "loadError": "Error loading article",
+    "posts": {
+      "react-hooks": {
+        "title": "React Hooks In-Depth",
+        "readTime": "15 min read",
+        "tags": ["React", "Hooks", "Frontend"]
+      },
+      "nextjs-15": {
+        "title": "Next.js 15 New Features",
+        "readTime": "20 min read",
+        "tags": ["Next.js", "React", "Full Stack"]
+      },
+      "typescript-advanced": {
+        "title": "TypeScript Advanced Types",
+        "readTime": "18 min read",
+        "tags": ["TypeScript", "Type System", "Frontend"]
+      },
+      "react-performance": {
+        "title": "React Performance Optimization",
+        "readTime": "22 min read",
+        "tags": ["React", "Performance", "Best Practices"]
+      }
+    }
   },
   "about": {
     "title": "About Me",
