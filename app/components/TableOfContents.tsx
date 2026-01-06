@@ -65,12 +65,12 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
     // 监听滚动，高亮当前章节
     const handleScroll = () => {
-      const headingElements = headings.map((heading) =>
+      const headingElements: (HTMLElement | null)[] = headings.map((heading) =>
         document.getElementById(heading.id)
       );
 
       // 找到当前在视窗中的标题
-      let currentHeading: HTMLElement | null = null;
+      let currentHeadingId: string | null = null;
       let minDistance = Infinity;
 
       headingElements.forEach((element) => {
@@ -81,13 +81,13 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           // 找到距离顶部最近的标题
           if (rect.top <= 200 && distance < minDistance) {
             minDistance = distance;
-            currentHeading = element;
+            currentHeadingId = element.id;
           }
         }
       });
 
-      if (currentHeading) {
-        setActiveId(currentHeading.id);
+      if (currentHeadingId) {
+        setActiveId(currentHeadingId);
       }
     };
 
@@ -156,7 +156,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                 className={`
                   text-left w-full text-sm py-2 px-3 rounded-lg transition-all duration-200
                   hover:bg-indigo-50 dark:hover:bg-indigo-900/30
-                  border-l-2 transition-all
+                  border-l-2
                   ${
                     isActive
                       ? "text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50/50 dark:bg-indigo-900/20 border-indigo-500 dark:border-indigo-400"

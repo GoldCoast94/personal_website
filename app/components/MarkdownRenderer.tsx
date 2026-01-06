@@ -73,7 +73,7 @@ export default function MarkdownRenderer({
         rehypePlugins={[rehypeHighlight, rehypeRaw]}
         components={{
           // 自定义标题渲染，添加 ID
-          h1({ node, children, ...props }: any) {
+          h1({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -82,7 +82,7 @@ export default function MarkdownRenderer({
               </h1>
             );
           },
-          h2({ node, children, ...props }: any) {
+          h2({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -91,7 +91,7 @@ export default function MarkdownRenderer({
               </h2>
             );
           },
-          h3({ node, children, ...props }: any) {
+          h3({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -100,7 +100,7 @@ export default function MarkdownRenderer({
               </h3>
             );
           },
-          h4({ node, children, ...props }: any) {
+          h4({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -109,7 +109,7 @@ export default function MarkdownRenderer({
               </h4>
             );
           },
-          h5({ node, children, ...props }: any) {
+          h5({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -118,7 +118,7 @@ export default function MarkdownRenderer({
               </h5>
             );
           },
-          h6({ node, children, ...props }: any) {
+          h6({ children, ...props }) {
             const text = children?.toString() || "";
             const id = generateHeadingId(text, headingCountRef.current++);
             return (
@@ -128,20 +128,24 @@ export default function MarkdownRenderer({
             );
           },
           // 自定义代码块渲染
-          code({ node, inline, className, children, ...props }: any) {
-            const match = /language-(\w+)/.exec(className || "");
+          code(props) {
+            const { inline, className, children, ...rest } = props as {
+              inline?: boolean;
+              className?: string;
+              children?: React.ReactNode;
+            };
             return !inline ? (
-              <code className={className} {...props}>
+              <code className={className} {...rest}>
                 {children}
               </code>
             ) : (
-              <code className={className} {...props}>
+              <code className={className} {...rest}>
                 {children}
               </code>
             );
           },
           // 自定义链接渲染
-          a({ node, children, href, ...props }: any) {
+          a({ children, href, ...props }) {
             return (
               <a
                 href={href}
