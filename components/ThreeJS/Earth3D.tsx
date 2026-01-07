@@ -164,35 +164,69 @@ export const Earth3D: React.FC = () => {
     pointLight.position.set(5, 3, 5);
     scene.add(pointLight);
 
+    // 鼠标拖拽交互变量
+    let isDragging = false;
+    let previousMouseX = 0;
+    let previousMouseY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+    const dampingFactor = 0.1; // 阻尼系数，控制惯性
+
+    const handleMouseDown = (event: MouseEvent) => {
+      isDragging = true;
+      previousMouseX = event.clientX;
+      previousMouseY = event.clientY;
+    };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!isDragging) return;
+
+      const deltaX = event.clientX - previousMouseX;
+      const deltaY = event.clientY - previousMouseY;
+
+      // 累加旋转角度，支持无限旋转
+      targetRotationY += deltaX * 0.005;
+      targetRotationX += deltaY * 0.005;
+
+      // 限制X轴旋转范围，避免翻转过度
+      targetRotationX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, targetRotationX));
+
+      previousMouseX = event.clientX;
+      previousMouseY = event.clientY;
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+    };
+
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseleave", handleMouseUp);
+
     // 动画
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // 地球自转
-      earth.rotation.y += 0.001;
-      atmosphere.rotation.y += 0.001;
+      // 平滑插值到目标旋转角度
+      currentRotationX += (targetRotationX - currentRotationX) * dampingFactor;
+      currentRotationY += (targetRotationY - currentRotationY) * dampingFactor;
+
+      // 应用旋转
+      earth.rotation.x = currentRotationX;
+      earth.rotation.y = currentRotationY;
+      atmosphere.rotation.x = currentRotationX;
+      atmosphere.rotation.y = currentRotationY;
+
+      // 星空缓慢自转
       stars.rotation.y += 0.0001;
 
       renderer.render(scene, camera);
     };
 
     animate();
-
-    // 鼠标交互
-    let mouseX = 0;
-    let mouseY = 0;
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!containerRef.current) return;
-      mouseX = (event.clientX / containerRef.current.clientWidth) * 2 - 1;
-      mouseY = -(event.clientY / containerRef.current.clientHeight) * 2 + 1;
-
-      earth.rotation.x = mouseY * 0.3;
-      earth.rotation.y = mouseX * 0.3;
-      atmosphere.rotation.x = mouseY * 0.3;
-      atmosphere.rotation.y = mouseX * 0.3;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
 
     // 处理窗口大小变化
     const handleResize = () => {
@@ -212,7 +246,10 @@ export const Earth3D: React.FC = () => {
     // 清理
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseleave", handleMouseUp);
       containerRef.current?.removeChild(renderer.domElement);
       geometry.dispose();
       material.dispose();
