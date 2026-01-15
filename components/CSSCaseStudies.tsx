@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations, useLocale } from 'next-intl';
 
 interface CaseStudy {
   id: string;
@@ -205,7 +206,8 @@ function DemoModal({
   );
 }
 
-const caseStudies: CaseStudy[] = [
+// 中文案例数据
+const caseStudiesZh: CaseStudy[] = [
   {
     id: "css-1",
     title: "响应式导航栏",
@@ -238,14 +240,87 @@ const caseStudies: CaseStudy[] = [
   },
 ];
 
+// 英文案例数据
+const caseStudiesEn: CaseStudy[] = [
+  {
+    id: "css-1",
+    title: "Responsive Navigation Bar",
+    description:
+      "Modern responsive navigation bar implemented with Flexbox and Grid, supporting mobile menus and animation effects. Includes hamburger menu, dropdown menu, and scroll effects. The navigation bar automatically adjusts layout based on screen size, showing a hamburger menu on mobile devices that expands into a side navigation when clicked. Supports smooth transition animations and interactive effects.",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains.jpg",
+    tags: ["Flexbox", "Grid", "Responsive Design", "Animation"],
+    codeUrl: "https://github.com/example/css-nav",
+  },
+  {
+    id: "css-2",
+    title: "Card Hover Effects",
+    description:
+      "Beautiful card hover animations implemented with CSS transforms and transitions, including 3D flip, shadow effects, and gradient backgrounds. Supports multi-level animations and interactive feedback. Cards perform 3D flips on mouse hover, revealing back content while adding shadow and scale effects to enhance user experience.",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/architecture-signs.jpg",
+    tags: ["Transform", "Transition", "3D Effects", "Shadow"],
+    codeUrl: "https://github.com/example/css-cards",
+  },
+  {
+    id: "css-3",
+    title: "Loading Animations",
+    description:
+      "Smooth loading animations implemented with CSS animations and keyframes, including progress bars, rotation effects, and pulse animations. Supports custom colors and sizes. Animation effects include rotating loading icons, progress bar animations, and pulse effects that can be used to enhance user experience during page loading.",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-boat.jpg",
+    tags: ["Animation", "Keyframes", "Loading", "Progress Bar"],
+    codeUrl: "https://github.com/example/css-loading",
+  },
+];
+
+// 日文案例数据
+const caseStudiesJa: CaseStudy[] = [
+  {
+    id: "css-1",
+    title: "レスポンシブナビゲーションバー",
+    description:
+      "FlexboxとGridを使用して実装されたモダンなレスポンシブナビゲーションバーで、モバイルメニューとアニメーション効果をサポートします。ハンバーガーメニュー、ドロップダウンメニュー、スクロール効果が含まれています。ナビゲーションバーは画面サイズに応じてレイアウトを自動調整し、モバイルデバイスではハンバーガーメニューを表示し、クリックするとサイドナビゲーションに展開されます。スムーズなトランジションアニメーションとインタラクティブエフェクトをサポートします。",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains.jpg",
+    tags: ["Flexbox", "Grid", "レスポンシブデザイン", "アニメーション"],
+    codeUrl: "https://github.com/example/css-nav",
+  },
+  {
+    id: "css-2",
+    title: "カードホバー効果",
+    description:
+      "CSS変換とトランジション効果を使用して実装された美しいカードホバーアニメーション。3Dフリップ、シャドウ効果、グラデーション背景が含まれています。マルチレベルアニメーションとインタラクティブフィードバックをサポートします。マウスホバー時にカードが3Dフリップを行い、背面コンテンツを表示しながら、シャドウとスケール効果を追加してユーザーエクスペリエンスを向上させます。",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/architecture-signs.jpg",
+    tags: ["Transform", "Transition", "3D効果", "シャドウ"],
+    codeUrl: "https://github.com/example/css-cards",
+  },
+  {
+    id: "css-3",
+    title: "ローディングアニメーション",
+    description:
+      "CSSアニメーションとキーフレームを使用して実装されたスムーズなローディングアニメーション。プログレスバー、回転効果、パルスアニメーションが含まれています。カスタムカラーとサイズをサポートします。アニメーション効果には、回転するローディングアイコン、プログレスバーアニメーション、パルス効果が含まれており、ページ読み込み時のユーザーエクスペリエンスを向上させるために使用できます。",
+    image:
+      "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-boat.jpg",
+    tags: ["Animation", "Keyframes", "Loading", "プログレスバー"],
+    codeUrl: "https://github.com/example/css-loading",
+  },
+];
+
 export default function CSSCaseStudies() {
+  const t = useTranslations('tech');
+  const locale = useLocale();
   const [selectedDemo, setSelectedDemo] = useState<string | null>(null);
   const [imageError, setImageError] = useState<Record<string, boolean>>({});
+
+  // 根据语言选择案例数据
+  const caseStudies = locale === 'en' ? caseStudiesEn : locale === 'ja' ? caseStudiesJa : caseStudiesZh;
 
   return (
     <div className="py-8">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-        案例展示
+        {t('caseShowcase')}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {caseStudies.map((caseStudy) => (
@@ -294,7 +369,7 @@ export default function CSSCaseStudies() {
                   onClick={() => setSelectedDemo(caseStudy.id)}
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-pink-600 rounded-lg hover:bg-pink-700 transition-colors duration-200"
                 >
-                  查看演示
+                  {t('viewDemo')}
                 </button>
                 {caseStudy.codeUrl && (
                   <a
@@ -303,7 +378,7 @@ export default function CSSCaseStudies() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
                   >
-                    查看代码
+                    {t('viewCode')}
                   </a>
                 )}
               </div>

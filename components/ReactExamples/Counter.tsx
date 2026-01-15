@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslations } from 'next-intl';
 import { Modal } from "./Modal";
 import { CodeBlock } from "./CodeBlock";
 
@@ -11,6 +12,7 @@ const overlayStyles =
 const contentStyles = "relative z-10 text-gray-900 dark:text-white";
 
 export const Counter: React.FC = () => {
+  const t = useTranslations('examples');
   const [count, setCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,9 +33,9 @@ export const Counter: React.FC = () => {
       <div className={commonCardStyles} onClick={() => setIsModalOpen(true)}>
         <div className={overlayStyles} />
         <div className={contentStyles}>
-          <h3 className="text-lg font-semibold mb-4">useState 计数器</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('counter.title')}</h3>
           <div className="flex flex-col items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-300">点击查看示例</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('clickToView')}</p>
           </div>
         </div>
       </div>
@@ -41,27 +43,26 @@ export const Counter: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="useState 计数器示例"
+        title={t('counter.modalTitle')}
       >
         <div className="space-y-6">
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              功能说明
+              {t('functionalDescription')}
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              这个示例展示了 React 的 useState Hook
-              的基本用法。通过点击按钮可以增加或减少计数器的值。
+              {t('counter.description')}
             </p>
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              代码实现
+              {t('codeImplementation')}
             </h4>
             <CodeBlock code={code} />
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              在线演示
+              {t('liveDemo')}
             </h4>
             <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
               <div className="flex flex-col items-center gap-4">
@@ -87,12 +88,12 @@ export const Counter: React.FC = () => {
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              关键点
+              {t('keyPoints')}
             </h4>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-              <li>使用 useState Hook 管理组件状态</li>
-              <li>通过 setCount 函数更新状态</li>
-              <li>状态更新会触发组件重新渲染</li>
+              <li>{t('counter.key1')}</li>
+              <li>{t('counter.key2')}</li>
+              <li>{t('counter.key3')}</li>
             </ul>
           </div>
         </div>

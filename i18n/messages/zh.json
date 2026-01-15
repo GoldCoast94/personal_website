@@ -31,6 +31,10 @@
       "gsap": {
         "title": "GSAP 动画库",
         "description": "使用 GSAP 创建流畅的动画效果"
+      },
+      "go": {
+        "title": "Go 并发编程",
+        "description": "使用 Go 语言构建高性能并发应用"
       }
     }
   },
@@ -83,6 +87,58 @@
     "title": "技术栈",
     "subtitle": "探索我使用的技术和工具",
     "viewDetails": "查看详情",
+    "backToTech": "返回技术栈",
+    "officialDocs": "官方文档",
+    "detailDescription": "详细说明",
+    "codeExample": "代码示例",
+    "actualCases": "实际案例",
+    "selectTopic": "请从左侧选择一个主题",
+    "pageNotFound": "页面未找到",
+    "caseShowcase": "案例展示",
+    "viewDemo": "查看演示",
+    "viewCode": "查看代码",
+    "reactHooksTitle": "React Hooks 示例",
+    "reactHooksDescription": "这些示例展示了 React Hooks 的基本用法和常见应用场景。每个示例都包含功能说明、代码实现和在线演示。",
+    "threejsExamples": {
+      "rotatingCube": {
+        "title": "旋转立方体",
+        "description": "Three.js 基础示例，展示如何创建一个带有光照效果的 3D 立方体，并添加平滑的旋转动画。这是学习 Three.js 的第一步。",
+        "modalDescription": "这是一个 Three.js 的基础示例，展示了如何创建场景、相机、渲染器、几何体和光源。",
+        "tags": ["基础", "几何体", "动画"]
+      },
+      "particleSystem": {
+        "title": "粒子系统",
+        "description": "创建一个动态的粒子系统，包含数千个粒子的运动和交互。展示 Three.js 在处理大量对象时的性能优化技巧。",
+        "modalDescription": "这个示例创建了一个包含 5000 个粒子的动态系统。",
+        "tags": ["粒子", "性能优化", "视觉效果"]
+      },
+      "earth3d": {
+        "title": "3D 地球",
+        "description": "使用着色器创建一个逼真的 3D 地球模型，包含大气层效果、星空背景和鼠标交互。展示 Three.js 的高级渲染能力。",
+        "modalDescription": "这个示例使用 Three.js 的着色器功能创建了一个逼真的 3D 地球模型。",
+        "tags": ["着色器", "交互", "高级渲染"]
+      }
+    },
+    "gsapExamples": {
+      "airpods": {
+        "title": "Airpods 滚动动画",
+        "description": "使用 GSAP ScrollTrigger 实现的逐帧动画效果，展示 Airpods 的细节和功能。通过滚动触发动画，创造流畅的视觉体验。",
+        "modalDescription": "这个示例展示了如何使用 GSAP 的 ScrollTrigger 插件创建基于滚动的逐帧动画。",
+        "tags": ["ScrollTrigger", "逐帧动画", "交互设计"]
+      },
+      "timeline": {
+        "title": "Timeline 动画序列",
+        "description": "使用 GSAP Timeline 创建复杂的动画序列，展示多个元素的协同动画效果。通过时间轴控制，实现精确的动画编排。",
+        "modalDescription": "这个示例展示了如何使用 GSAP Timeline 创建复杂的动画序列。",
+        "tags": ["Timeline", "动画序列", "协同动画"]
+      },
+      "scroll": {
+        "title": "滚动触发动画",
+        "description": "使用 ScrollTrigger 创建滚动触发的动画效果，为页面添加动态的视觉元素。通过滚动位置触发不同的动画状态。",
+        "modalDescription": "这个示例展示了如何使用 GSAP 的 ScrollTrigger 插件创建滚动触发的动画效果。",
+        "tags": ["ScrollTrigger", "滚动动画", "视差效果"]
+      }
+    },
     "categories": {
       "react": {
         "name": "React",
@@ -103,7 +159,84 @@
       "gsap": {
         "name": "GSAP",
         "description": "专业的 JavaScript 动画库"
+      },
+      "go": {
+        "name": "Go",
+        "description": "高效、简洁、并发的编程语言"
       }
+    }
+  },
+  "examples": {
+    "clickToView": "点击查看示例",
+    "functionalDescription": "功能说明",
+    "codeImplementation": "代码实现",
+    "liveDemo": "在线演示",
+    "keyPoints": "关键点",
+    "counter": {
+      "title": "useState 计数器",
+      "modalTitle": "useState 计数器示例",
+      "description": "这个示例展示了 React 的 useState Hook 的基本用法。通过点击按钮可以增加或减少计数器的值。",
+      "key1": "使用 useState Hook 管理组件状态",
+      "key2": "通过 setCount 函数更新状态",
+      "key3": "状态更新会触发组件重新渲染"
+    },
+    "inputEffect": {
+      "title": "useEffect 输入框",
+      "modalTitle": "useEffect 输入框示例",
+      "description": "这个示例展示了 useEffect Hook 的使用。当输入框的内容发生变化时，会自动计算并更新字符数。",
+      "placeholder": "输入文字...",
+      "charCount": "字符数",
+      "key1": "useEffect 用于处理副作用",
+      "key2": "依赖数组 [input] 确保只在输入变化时执行",
+      "key3": "自动同步状态更新"
+    },
+    "timer": {
+      "title": "useRef 定时器",
+      "modalTitle": "useRef 定时器示例",
+      "description": "这个示例展示了 useRef Hook 的使用。通过 useRef 保存定时器引用，并在组件卸载时清理定时器。",
+      "seconds": "秒",
+      "key1": "useRef 用于保存可变值",
+      "key2": "useEffect 的清理函数用于防止内存泄漏",
+      "key3": "组件卸载时自动清理定时器"
+    },
+    "todoList": {
+      "title": "待办事项",
+      "modalTitle": "待办事项示例",
+      "description": "这个示例展示了 React 中状态管理的综合应用。实现了待办事项的添加、删除功能，并支持回车键快速添加。",
+      "placeholder": "添加新任务...",
+      "add": "添加",
+      "delete": "删除",
+      "key1": "使用数组状态管理待办事项列表",
+      "key2": "实现添加和删除功能",
+      "key3": "处理键盘事件（回车键）",
+      "key4": "列表渲染和条件渲染"
+    },
+    "themeButton": {
+      "title": "useContext 主题切换",
+      "modalTitle": "useContext 主题切换示例",
+      "description": "这个示例展示了如何使用 useContext Hook 和 Context API 来实现全局主题切换功能。通过 Context 可以在组件树中共享状态，而不需要通过 props 层层传递。",
+      "toggleTheme": "切换主题",
+      "currentTheme": "当前主题",
+      "sampleContent": "这是一个示例内容区域",
+      "key1": "使用 createContext 创建上下文",
+      "key2": "使用 Provider 组件提供值",
+      "key3": "使用 useContext Hook 消费上下文值",
+      "key4": "通过 Context 实现组件间的状态共享"
+    },
+    "shoppingCart": {
+      "title": "useReducer 购物车",
+      "modalTitle": "useReducer 购物车示例",
+      "description": "这个示例展示了如何使用 useReducer Hook 来管理复杂的购物车状态。通过 reducer 函数，我们可以集中处理所有的状态更新逻辑，使代码更加清晰和可维护。",
+      "productList": "商品列表",
+      "product": "商品",
+      "addToCart": "加入购物车",
+      "cart": "购物车",
+      "emptyCart": "购物车是空的",
+      "total": "总计",
+      "key1": "使用 useReducer 管理复杂状态",
+      "key2": "通过 reducer 函数集中处理状态更新逻辑",
+      "key3": "使用 TypeScript 类型定义确保类型安全",
+      "key4": "实现添加、删除、更新数量等功能"
     }
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslations } from 'next-intl';
 import { Modal } from "./Modal";
 import { CodeBlock } from "./CodeBlock";
 
@@ -11,6 +12,7 @@ const overlayStyles =
 const contentStyles = "relative z-10";
 
 export const TodoList: React.FC = () => {
+  const t = useTranslations('examples');
   const [todos, setTodos] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,10 +69,10 @@ export const TodoList: React.FC = () => {
         <div className={overlayStyles} />
         <div className={contentStyles}>
           <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-            待办事项
+            {t('todoList.title')}
           </h3>
           <div className="flex flex-col items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-300">点击查看示例</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('clickToView')}</p>
           </div>
         </div>
       </div>
@@ -78,27 +80,26 @@ export const TodoList: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="待办事项示例"
+        title={t('todoList.modalTitle')}
       >
         <div className="space-y-6">
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              功能说明
+              {t('functionalDescription')}
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              这个示例展示了 React
-              中状态管理的综合应用。实现了待办事项的添加、删除功能，并支持回车键快速添加。
+              {t('todoList.description')}
             </p>
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              代码实现
+              {t('codeImplementation')}
             </h4>
             <CodeBlock code={code} />
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              在线演示
+              {t('liveDemo')}
             </h4>
             <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
               <div className="flex flex-col gap-4">
@@ -111,13 +112,13 @@ export const TodoList: React.FC = () => {
                       e.key === "Enter" && addTodo()
                     }
                     className="flex-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
-                    placeholder="添加新任务..."
+                    placeholder={t('todoList.placeholder')}
                   />
                   <button
                     onClick={addTodo}
                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
                   >
-                    添加
+                    {t('todoList.add')}
                   </button>
                 </div>
                 <ul className="space-y-2">
@@ -131,7 +132,7 @@ export const TodoList: React.FC = () => {
                         onClick={() => removeTodo(index)}
                         className="text-red-500 hover:text-red-600 transition-colors"
                       >
-                        删除
+                        {t('todoList.delete')}
                       </button>
                     </li>
                   ))}
@@ -141,13 +142,13 @@ export const TodoList: React.FC = () => {
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              关键点
+              {t('keyPoints')}
             </h4>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-              <li>使用数组状态管理待办事项列表</li>
-              <li>实现添加和删除功能</li>
-              <li>处理键盘事件（回车键）</li>
-              <li>列表渲染和条件渲染</li>
+              <li>{t('todoList.key1')}</li>
+              <li>{t('todoList.key2')}</li>
+              <li>{t('todoList.key3')}</li>
+              <li>{t('todoList.key4')}</li>
             </ul>
           </div>
         </div>

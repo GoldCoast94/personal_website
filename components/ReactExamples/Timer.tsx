@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslations } from 'next-intl';
 import { Modal } from "./Modal";
 import { CodeBlock } from "./CodeBlock";
 
@@ -11,6 +12,7 @@ const overlayStyles =
 const contentStyles = "relative z-10";
 
 export const Timer: React.FC = () => {
+  const t = useTranslations('examples');
   const [time, setTime] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,10 +54,10 @@ export const Timer: React.FC = () => {
         <div className={overlayStyles} />
         <div className={contentStyles}>
           <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-            useRef 定时器
+            {t('timer.title')}
           </h3>
           <div className="flex flex-col items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-300">点击查看示例</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('clickToView')}</p>
           </div>
         </div>
       </div>
@@ -63,44 +65,43 @@ export const Timer: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="useRef 定时器示例"
+        title={t('timer.modalTitle')}
       >
         <div className="space-y-6">
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              功能说明
+              {t('functionalDescription')}
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              这个示例展示了 useRef Hook 的使用。通过 useRef
-              保存定时器引用，并在组件卸载时清理定时器。
+              {t('timer.description')}
             </p>
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              代码实现
+              {t('codeImplementation')}
             </h4>
             <CodeBlock code={code} />
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              在线演示
+              {t('liveDemo')}
             </h4>
             <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
               <div className="flex flex-col items-center gap-4">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {time} 秒
+                  {t('timer.seconds', { time })}
                 </p>
               </div>
             </div>
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              关键点
+              {t('keyPoints')}
             </h4>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-              <li>useRef 用于保存可变值</li>
-              <li>useEffect 的清理函数用于防止内存泄漏</li>
-              <li>组件卸载时自动清理定时器</li>
+              <li>{t('timer.key1')}</li>
+              <li>{t('timer.key2')}</li>
+              <li>{t('timer.key3')}</li>
             </ul>
           </div>
         </div>

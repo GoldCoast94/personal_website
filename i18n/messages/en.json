@@ -31,6 +31,10 @@
       "gsap": {
         "title": "GSAP Animation Library",
         "description": "Create smooth animations with GSAP"
+      },
+      "go": {
+        "title": "Go Concurrent Programming",
+        "description": "Build high-performance concurrent applications with Go"
       }
     }
   },
@@ -83,6 +87,58 @@
     "title": "Tech Stack",
     "subtitle": "Explore the technologies and tools I use",
     "viewDetails": "View Details",
+    "backToTech": "Back to Tech Stack",
+    "officialDocs": "Official Documentation",
+    "detailDescription": "Detailed Description",
+    "codeExample": "Code Example",
+    "actualCases": "Practical Cases",
+    "selectTopic": "Please select a topic from the left",
+    "pageNotFound": "Page Not Found",
+    "caseShowcase": "Case Showcase",
+    "viewDemo": "View Demo",
+    "viewCode": "View Code",
+    "reactHooksTitle": "React Hooks Examples",
+    "reactHooksDescription": "These examples demonstrate the basic usage and common application scenarios of React Hooks. Each example includes functionality description, code implementation, and live demonstration.",
+    "threejsExamples": {
+      "rotatingCube": {
+        "title": "Rotating Cube",
+        "description": "A basic Three.js example showing how to create a 3D cube with lighting effects and smooth rotation animation. This is the first step in learning Three.js.",
+        "modalDescription": "This is a basic Three.js example demonstrating how to create scenes, cameras, renderers, geometry, and lighting.",
+        "tags": ["Basics", "Geometry", "Animation"]
+      },
+      "particleSystem": {
+        "title": "Particle System",
+        "description": "Create a dynamic particle system with thousands of moving and interacting particles. Demonstrates performance optimization techniques in Three.js when handling large numbers of objects.",
+        "modalDescription": "This example creates a dynamic system containing 5000 particles.",
+        "tags": ["Particles", "Performance", "Visual Effects"]
+      },
+      "earth3d": {
+        "title": "3D Earth",
+        "description": "Create a realistic 3D Earth model using shaders, including atmosphere effects, starry background, and mouse interaction. Demonstrates Three.js advanced rendering capabilities.",
+        "modalDescription": "This example uses Three.js shader functionality to create a realistic 3D Earth model.",
+        "tags": ["Shaders", "Interaction", "Advanced Rendering"]
+      }
+    },
+    "gsapExamples": {
+      "airpods": {
+        "title": "Airpods Scroll Animation",
+        "description": "Frame-by-frame animation effect implemented with GSAP ScrollTrigger, showcasing Airpods details and features. Creates smooth visual experience through scroll-triggered animation.",
+        "modalDescription": "This example demonstrates how to create scroll-based frame-by-frame animations using GSAP's ScrollTrigger plugin.",
+        "tags": ["ScrollTrigger", "Frame Animation", "Interactive Design"]
+      },
+      "timeline": {
+        "title": "Timeline Animation Sequence",
+        "description": "Create complex animation sequences using GSAP Timeline, demonstrating coordinated animation effects of multiple elements. Achieve precise animation choreography through timeline control.",
+        "modalDescription": "This example demonstrates how to create complex animation sequences using GSAP Timeline.",
+        "tags": ["Timeline", "Animation Sequence", "Coordinated Animation"]
+      },
+      "scroll": {
+        "title": "Scroll Trigger Animation",
+        "description": "Create scroll-triggered animation effects using ScrollTrigger, adding dynamic visual elements to pages. Trigger different animation states based on scroll position.",
+        "modalDescription": "This example demonstrates how to create scroll-triggered animation effects using GSAP's ScrollTrigger plugin.",
+        "tags": ["ScrollTrigger", "Scroll Animation", "Parallax Effect"]
+      }
+    },
     "categories": {
       "react": {
         "name": "React",
@@ -103,7 +159,84 @@
       "gsap": {
         "name": "GSAP",
         "description": "Professional JavaScript animation library"
+      },
+      "go": {
+        "name": "Go",
+        "description": "Efficient, concise, concurrent programming language"
       }
+    }
+  },
+  "examples": {
+    "clickToView": "Click to view example",
+    "functionalDescription": "Functional Description",
+    "codeImplementation": "Code Implementation",
+    "liveDemo": "Live Demo",
+    "keyPoints": "Key Points",
+    "counter": {
+      "title": "useState Counter",
+      "modalTitle": "useState Counter Example",
+      "description": "This example demonstrates the basic usage of React's useState Hook. Click the buttons to increase or decrease the counter value.",
+      "key1": "Use useState Hook to manage component state",
+      "key2": "Update state through setCount function",
+      "key3": "State updates trigger component re-renders"
+    },
+    "inputEffect": {
+      "title": "useEffect Input",
+      "modalTitle": "useEffect Input Example",
+      "description": "This example demonstrates the use of useEffect Hook. When the input content changes, it automatically calculates and updates the character count.",
+      "placeholder": "Enter text...",
+      "charCount": "Character count",
+      "key1": "useEffect is used to handle side effects",
+      "key2": "Dependency array [input] ensures execution only on input changes",
+      "key3": "Automatically synchronize state updates"
+    },
+    "timer": {
+      "title": "useRef Timer",
+      "modalTitle": "useRef Timer Example",
+      "description": "This example demonstrates the use of useRef Hook. Save timer reference through useRef and clean up the timer when component unmounts.",
+      "seconds": "seconds",
+      "key1": "useRef is used to save mutable values",
+      "key2": "useEffect cleanup function prevents memory leaks",
+      "key3": "Automatically clean up timer on component unmount"
+    },
+    "todoList": {
+      "title": "Todo List",
+      "modalTitle": "Todo List Example",
+      "description": "This example demonstrates comprehensive state management in React. Implements add and delete functionality for todo items, with support for quick add via Enter key.",
+      "placeholder": "Add new task...",
+      "add": "Add",
+      "delete": "Delete",
+      "key1": "Use array state to manage todo list",
+      "key2": "Implement add and delete functionality",
+      "key3": "Handle keyboard events (Enter key)",
+      "key4": "List rendering and conditional rendering"
+    },
+    "themeButton": {
+      "title": "useContext Theme Toggle",
+      "modalTitle": "useContext Theme Toggle Example",
+      "description": "This example demonstrates how to use useContext Hook and Context API to implement global theme switching. Context allows state sharing in the component tree without prop drilling.",
+      "toggleTheme": "Toggle Theme",
+      "currentTheme": "Current theme",
+      "sampleContent": "This is a sample content area",
+      "key1": "Use createContext to create context",
+      "key2": "Use Provider component to provide values",
+      "key3": "Use useContext Hook to consume context values",
+      "key4": "Share state between components through Context"
+    },
+    "shoppingCart": {
+      "title": "useReducer Shopping Cart",
+      "modalTitle": "useReducer Shopping Cart Example",
+      "description": "This example demonstrates how to use useReducer Hook to manage complex shopping cart state. Through reducer function, we can centralize all state update logic, making code clearer and more maintainable.",
+      "productList": "Product List",
+      "product": "Product",
+      "addToCart": "Add to Cart",
+      "cart": "Shopping Cart",
+      "emptyCart": "Cart is empty",
+      "total": "Total",
+      "key1": "Use useReducer to manage complex state",
+      "key2": "Centralize state update logic through reducer function",
+      "key3": "Use TypeScript type definitions to ensure type safety",
+      "key4": "Implement add, remove, update quantity functionality"
     }
   }
 }

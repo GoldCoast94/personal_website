@@ -31,6 +31,10 @@
       "gsap": {
         "title": "GSAPアニメーションライブラリ",
         "description": "GSAPでスムーズなアニメーションを作成"
+      },
+      "go": {
+        "title": "Go並行プログラミング",
+        "description": "Goで高性能な並行アプリケーションを構築"
       }
     }
   },
@@ -83,6 +87,58 @@
     "title": "技術スタック",
     "subtitle": "私が使用している技術とツールを探索",
     "viewDetails": "詳細を見る",
+    "backToTech": "技術スタックに戻る",
+    "officialDocs": "公式ドキュメント",
+    "detailDescription": "詳細説明",
+    "codeExample": "コード例",
+    "actualCases": "実際のケース",
+    "selectTopic": "左側からトピックを選択してください",
+    "pageNotFound": "ページが見つかりません",
+    "caseShowcase": "ケースショーケース",
+    "viewDemo": "デモを見る",
+    "viewCode": "コードを見る",
+    "reactHooksTitle": "React Hooks 例",
+    "reactHooksDescription": "これらの例は、React Hooks の基本的な使用法と一般的なアプリケーションシナリオを示しています。各例には機能説明、コード実装、ライブデモが含まれています。",
+    "threejsExamples": {
+      "rotatingCube": {
+        "title": "回転するキューブ",
+        "description": "ライト効果とスムーズな回転アニメーションを備えた3Dキューブの作成方法を示すThree.jsの基本例。Three.jsを学ぶための最初のステップです。",
+        "modalDescription": "これは、シーン、カメラ、レンダラー、ジオメトリ、ライトの作成方法を示すThree.jsの基本例です。",
+        "tags": ["基礎", "ジオメトリ", "アニメーション"]
+      },
+      "particleSystem": {
+        "title": "パーティクルシステム",
+        "description": "数千の動く粒子と相互作用する動的パーティクルシステムを作成します。大量のオブジェクトを処理する際のThree.jsのパフォーマンス最適化技術を示します。",
+        "modalDescription": "この例は、5000個の粒子を含む動的システムを作成します。",
+        "tags": ["パーティクル", "パフォーマンス最適化", "視覚効果"]
+      },
+      "earth3d": {
+        "title": "3D 地球",
+        "description": "シェーダーを使用してリアルな3D地球モデルを作成し、大気層効果、星空背景、マウスインタラクションを含みます。Three.jsの高度なレンダリング機能を示します。",
+        "modalDescription": "この例は、Three.jsのシェーダー機能を使用してリアルな3D地球モデルを作成します。",
+        "tags": ["シェーダー", "インタラクション", "高度なレンダリング"]
+      }
+    },
+    "gsapExamples": {
+      "airpods": {
+        "title": "Airpods スクロールアニメーション",
+        "description": "GSAP ScrollTriggerで実装されたフレームバイフレームアニメーション効果で、Airpodsの詳細と機能を紹介します。スクロールトリガーアニメーションを通じてスムーズな視覚体験を作り出します。",
+        "modalDescription": "この例は、GSAPのScrollTriggerプラグインを使用してスクロールベースのフレームバイフレームアニメーションを作成する方法を示しています。",
+        "tags": ["ScrollTrigger", "フレームアニメーション", "インタラクティブデザイン"]
+      },
+      "timeline": {
+        "title": "Timeline アニメーションシーケンス",
+        "description": "GSAP Timelineを使用して複雑なアニメーションシーケンスを作成し、複数の要素の協調アニメーション効果を示します。タイムライン制御を通じて正確なアニメーション編成を実現します。",
+        "modalDescription": "この例は、GSAP Timelineを使用して複雑なアニメーションシーケンスを作成する方法を示しています。",
+        "tags": ["Timeline", "アニメーションシーケンス", "協調アニメーション"]
+      },
+      "scroll": {
+        "title": "スクロールトリガーアニメーション",
+        "description": "ScrollTriggerを使用してスクロールトリガーアニメーション効果を作成し、ページに動的な視覚要素を追加します。スクロール位置に基づいて異なるアニメーション状態をトリガーします。",
+        "modalDescription": "この例は、GSAPのScrollTriggerプラグインを使用してスクロールトリガーアニメーション効果を作成する方法を示しています。",
+        "tags": ["ScrollTrigger", "スクロールアニメーション", "パララックス効果"]
+      }
+    },
     "categories": {
       "react": {
         "name": "React",
@@ -103,7 +159,84 @@
       "gsap": {
         "name": "GSAP",
         "description": "プロフェッショナルなJavaScriptアニメーションライブラリ"
+      },
+      "go": {
+        "name": "Go",
+        "description": "効率的で簡潔、並行性のあるプログラミング言語"
       }
+    }
+  },
+  "examples": {
+    "clickToView": "クリックして例を表示",
+    "functionalDescription": "機能説明",
+    "codeImplementation": "コード実装",
+    "liveDemo": "ライブデモ",
+    "keyPoints": "重要なポイント",
+    "counter": {
+      "title": "useState カウンター",
+      "modalTitle": "useState カウンター例",
+      "description": "この例は、ReactのuseState Hookの基本的な使用法を示しています。ボタンをクリックしてカウンター値を増減できます。",
+      "key1": "useState Hookを使用してコンポーネントの状態を管理",
+      "key2": "setCount関数を通じて状態を更新",
+      "key3": "状態の更新はコンポーネントの再レンダリングをトリガー"
+    },
+    "inputEffect": {
+      "title": "useEffect 入力フィールド",
+      "modalTitle": "useEffect 入力フィールド例",
+      "description": "この例は、useEffect Hookの使用を示しています。入力内容が変更されると、自動的に文字数を計算および更新します。",
+      "placeholder": "テキストを入力...",
+      "charCount": "文字数",
+      "key1": "useEffectは副作用を処理するために使用",
+      "key2": "依存配列[input]は入力変更時のみ実行を保証",
+      "key3": "状態の更新を自動的に同期"
+    },
+    "timer": {
+      "title": "useRef タイマー",
+      "modalTitle": "useRef タイマー例",
+      "description": "この例は、useRef Hookの使用を示しています。useRefを通じてタイマー参照を保存し、コンポーネントのアンマウント時にタイマーをクリーンアップします。",
+      "seconds": "秒",
+      "key1": "useRefは可変値を保存するために使用",
+      "key2": "useEffectのクリーンアップ関数はメモリリークを防止",
+      "key3": "コンポーネントのアンマウント時にタイマーを自動クリーンアップ"
+    },
+    "todoList": {
+      "title": "ToDoリスト",
+      "modalTitle": "ToDoリスト例",
+      "description": "この例は、Reactでの包括的な状態管理を示しています。ToDoアイテムの追加・削除機能を実装し、Enterキーによる素早い追加をサポートします。",
+      "placeholder": "新しいタスクを追加...",
+      "add": "追加",
+      "delete": "削除",
+      "key1": "配列状態を使用してToDoリストを管理",
+      "key2": "追加および削除機能を実装",
+      "key3": "キーボードイベント（Enterキー）を処理",
+      "key4": "リストレンダリングと条件付きレンダリング"
+    },
+    "themeButton": {
+      "title": "useContext テーマ切り替え",
+      "modalTitle": "useContext テーマ切り替え例",
+      "description": "この例は、useContext HookとContext APIを使用してグローバルテーマ切り替え機能を実装する方法を示しています。Contextを使用すると、propsのバケツリレーなしでコンポーネントツリー内で状態を共有できます。",
+      "toggleTheme": "テーマを切り替え",
+      "currentTheme": "現在のテーマ",
+      "sampleContent": "これはサンプルコンテンツエリアです",
+      "key1": "createContextを使用してコンテキストを作成",
+      "key2": "Providerコンポーネントを使用して値を提供",
+      "key3": "useContext Hookを使用してコンテキスト値を消費",
+      "key4": "Contextを通じてコンポーネント間で状態を共有"
+    },
+    "shoppingCart": {
+      "title": "useReducer ショッピングカート",
+      "modalTitle": "useReducer ショッピングカート例",
+      "description": "この例は、useReducer Hookを使用して複雑なショッピングカートの状態を管理する方法を示しています。reducer関数を通じて、すべての状態更新ロジックを集中化し、コードをより明確で保守可能にします。",
+      "productList": "商品リスト",
+      "product": "商品",
+      "addToCart": "カートに追加",
+      "cart": "ショッピングカート",
+      "emptyCart": "カートは空です",
+      "total": "合計",
+      "key1": "useReducerを使用して複雑な状態を管理",
+      "key2": "reducer関数を通じて状態更新ロジックを集中化",
+      "key3": "TypeScript型定義を使用して型安全性を確保",
+      "key4": "追加、削除、数量更新機能を実装"
     }
   }
 }

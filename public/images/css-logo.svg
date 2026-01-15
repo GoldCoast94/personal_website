@@ -1,0 +1,31 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- CSS3 official logo -->
+  <defs>
+    <linearGradient id="css-gradient-1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1572B6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#33A9DC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="css-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#33A9DC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1572B6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Shield background -->
+  <path d="M8 2L11.5 56L32 62L52.5 56L56 2Z" fill="url(#css-gradient-1)"/>
+
+  <!-- CSS3 text and design -->
+  <path d="M32 8L48 12L46.5 52L32 56L17.5 52L16 12Z" fill="url(#css-gradient-2)"/>
+
+  <!-- "3" -->
+  <path d="M32 16V18L44 21V19L32 16Z" fill="white"/>
+  <path d="M32 24V26L40 28V26L32 24Z" fill="white"/>
+  <path d="M32 32V34L44 37V35L32 32Z" fill="white"/>
+  <path d="M32 40V42L40 44V42L32 40Z" fill="white"/>
+
+  <!-- Left side details -->
+  <path d="M20 21L22 22L20 23V21Z" fill="white" opacity="0.9"/>
+  <path d="M24 28L26 29L24 30V28Z" fill="white" opacity="0.9"/>
+  <path d="M20 37L22 38L20 39V37Z" fill="white" opacity="0.9"/>
+  <path d="M24 44L26 45L24 46V44Z" fill="white" opacity="0.9"/>
+</svg>

@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from "react";
+import { useTranslations } from 'next-intl';
 import { Modal } from "./Modal";
 import { CodeBlock } from "./CodeBlock";
 
@@ -85,16 +86,17 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-// 示例商品数据
-const products: Product[] = [
-  { id: 1, name: "商品 1", price: 100 },
-  { id: 2, name: "商品 2", price: 200 },
-  { id: 3, name: "商品 3", price: 300 },
-];
-
 export const ShoppingCart: React.FC = () => {
+  const t = useTranslations('examples');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cart, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
+
+  // 示例商品数据
+  const products: Product[] = [
+    { id: 1, name: t('shoppingCart.product', { number: 1 }), price: 100 },
+    { id: 2, name: t('shoppingCart.product', { number: 2 }), price: 200 },
+    { id: 3, name: t('shoppingCart.product', { number: 3 }), price: 300 },
+  ];
 
   const code = `// 购物车状态类型
 type CartState = {
@@ -164,9 +166,9 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       <div className={commonCardStyles} onClick={() => setIsModalOpen(true)}>
         <div className={overlayStyles} />
         <div className={contentStyles}>
-          <h3 className="text-lg font-semibold mb-4">useReducer 购物车</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('shoppingCart.title')}</h3>
           <div className="flex flex-col items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-300">点击查看示例</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('clickToView')}</p>
           </div>
         </div>
       </div>
@@ -174,34 +176,32 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="useReducer 购物车示例"
+        title={t('shoppingCart.modalTitle')}
       >
         <div className="space-y-6">
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              功能说明
+              {t('functionalDescription')}
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              这个示例展示了如何使用 useReducer Hook
-              来管理复杂的购物车状态。通过 reducer
-              函数，我们可以集中处理所有的状态更新逻辑，使代码更加清晰和可维护。
+              {t('shoppingCart.description')}
             </p>
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              代码实现
+              {t('codeImplementation')}
             </h4>
             <CodeBlock code={code} />
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              在线演示
+              {t('liveDemo')}
             </h4>
             <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
               <div className="space-y-6">
                 <div>
                   <h5 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-                    商品列表
+                    {t('shoppingCart.productList')}
                   </h5>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {products.map((product) => (
@@ -221,7 +221,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
                           }
                           className="mt-2 w-full px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition-colors"
                         >
-                          加入购物车
+                          {t('shoppingCart.addToCart')}
                         </button>
                       </div>
                     ))}
@@ -229,11 +229,11 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
                 </div>
                 <div>
                   <h5 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-                    购物车
+                    {t('shoppingCart.cart')}
                   </h5>
                   {cart.items.length === 0 ? (
                     <p className="text-gray-600 dark:text-gray-300">
-                      购物车是空的
+                      {t('shoppingCart.emptyCart')}
                     </p>
                   ) : (
                     <div className="space-y-4">
@@ -293,14 +293,14 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
                               }
                               className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                             >
-                              删除
+                              {t('todoList.delete')}
                             </button>
                           </div>
                         </div>
                       ))}
                       <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                         <span className="font-medium text-gray-900 dark:text-white">
-                          总计:
+                          {t('shoppingCart.total')}
                         </span>
                         <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
                           ¥{cart.total}
@@ -314,13 +314,13 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
           </div>
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              关键点
+              {t('keyPoints')}
             </h4>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-              <li>使用 useReducer 管理复杂状态</li>
-              <li>通过 reducer 函数集中处理状态更新逻辑</li>
-              <li>使用 TypeScript 类型定义确保类型安全</li>
-              <li>实现添加、删除、更新数量等功能</li>
+              <li>{t('shoppingCart.key1')}</li>
+              <li>{t('shoppingCart.key2')}</li>
+              <li>{t('shoppingCart.key3')}</li>
+              <li>{t('shoppingCart.key4')}</li>
             </ul>
           </div>
         </div>

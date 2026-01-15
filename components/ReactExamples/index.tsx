@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from 'next-intl';
 import { Counter } from "./Counter";
 import { InputEffect } from "./InputEffect";
 import { Timer } from "./Timer";
@@ -7,15 +8,16 @@ import { ThemeButton, ThemeProvider } from "./ThemeButton";
 import { ShoppingCart } from "./ShoppingCart";
 
 const ReactExamples: React.FC = () => {
+  const t = useTranslations('tech');
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          React Hooks 示例
+          {t('reactHooksTitle')}
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          这些示例展示了 React Hooks
-          的基本用法和常见应用场景。每个示例都包含功能说明、代码实现和在线演示。
+          {t('reactHooksDescription')}
         </p>
       </div>
       <div className="relative">
