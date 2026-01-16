@@ -45,14 +45,6 @@ export const threejsExamplesZh: Example[] = [
     icon: "✨",
     tags: ["粒子", "性能优化", "视觉效果"],
   },
-  {
-    id: "earth-3d",
-    title: "3D 地球",
-    description:
-      "使用着色器创建一个逼真的 3D 地球模型，包含大气层效果、星空背景和鼠标交互。展示 Three.js 的高级渲染能力。",
-    icon: "🌍",
-    tags: ["着色器", "交互", "高级渲染"],
-  },
 ];
 
 // 英文案例数据
@@ -100,14 +92,6 @@ export const threejsExamplesEn: Example[] = [
     icon: "✨",
     tags: ["Particles", "Performance", "Visual Effects"],
   },
-  {
-    id: "earth-3d",
-    title: "3D Earth",
-    description:
-      "Create a realistic 3D Earth model using shaders, including atmosphere effects, starry background, and mouse interaction. Demonstrates Three.js advanced rendering capabilities.",
-    icon: "🌍",
-    tags: ["Shaders", "Interaction", "Advanced Rendering"],
-  },
 ];
 
 // 日文案例数据
@@ -154,14 +138,6 @@ export const threejsExamplesJa: Example[] = [
       "数千の動く粒子と相互作用する動的パーティクルシステムを作成します。大量のオブジェクトを処理する際のThree.jsのパフォーマンス最適化技術を示します。",
     icon: "✨",
     tags: ["パーティクル", "パフォーマンス最適化", "視覚効果"],
-  },
-  {
-    id: "earth-3d",
-    title: "3D 地球",
-    description:
-      "シェーダーを使用してリアルな3D地球モデルを作成し、大気層効果、星空背景、マウスインタラクションを含みます。Three.jsの高度なレンダリング機能を示します。",
-    icon: "🌍",
-    tags: ["シェーダー", "インタラクション", "高度なレンダリング"],
   },
 ];
 

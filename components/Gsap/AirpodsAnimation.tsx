@@ -19,7 +19,7 @@ const urls = new Array(frameCount)
 const imageCache = new Map<string, HTMLImageElement>();
 let isPreloading = false;
 
-export const AirpodsAnimation: React.FC = () => {
+const AirpodsAnimationComponent: React.FC = () => {
   const modalCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -52,7 +52,7 @@ export const AirpodsAnimation: React.FC = () => {
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
 
-  // 预加载图片函数
+  // 预加载图片函数 - 优化：分批加载而不是全部并发
   const preloadImages = async () => {
     if (isPreloading) return; // 防止重复加载
 
@@ -70,30 +70,39 @@ export const AirpodsAnimation: React.FC = () => {
     const images: HTMLImageElement[] = [];
 
     try {
-      // 使用 Promise.all 并发加载，提高加载速度
-      const loadPromises = urls.map((url, i) => {
-        return new Promise<HTMLImageElement>((resolve, reject) => {
-          // 先检查缓存
-          if (imageCache.has(url)) {
-            resolve(imageCache.get(url)!);
-            return;
-          }
+      // 优化：分批加载，每批10张，减少并发压力
+      const batchSize = 10;
+      let loadedCount = 0;
 
-          const img = new window.Image();
-          // 设置 crossOrigin 以支持浏览器缓存
-          img.crossOrigin = "anonymous";
-          img.src = url;
+      for (let i = 0; i < urls.length; i += batchSize) {
+        const batch = urls.slice(i, Math.min(i + batchSize, urls.length));
+        const batchPromises = batch.map((url, batchIndex) => {
+          return new Promise<HTMLImageElement>((resolve, reject) => {
+            // 先检查缓存
+            if (imageCache.has(url)) {
+              resolve(imageCache.get(url)!);
+              return;
+            }
 
-          img.onload = () => {
-            imageCache.set(url, img); // 缓存图片
-            setLoadProgress(Math.round(((i + 1) / frameCount) * 100));
-            resolve(img);
-          };
-          img.onerror = () => reject(new Error(`Failed to load image ${i + 1}`));
+            const img = new window.Image();
+            // 设置 crossOrigin 以支持浏览器缓存
+            img.crossOrigin = "anonymous";
+            img.src = url;
+
+            img.onload = () => {
+              imageCache.set(url, img); // 缓存图片
+              loadedCount++;
+              setLoadProgress(Math.round((loadedCount / frameCount) * 100));
+              resolve(img);
+            };
+            img.onerror = () => reject(new Error(`Failed to load image ${i + batchIndex + 1}`));
+          });
         });
-      });
 
-      images.push(...(await Promise.all(loadPromises)));
+        const batchImages = await Promise.all(batchPromises);
+        images.push(...batchImages);
+      }
+
       imagesRef.current = images;
       setIsLoading(false);
       isPreloading = false;
@@ -253,3 +262,6 @@ export const AirpodsAnimation: React.FC = () => {
     </>
   );
 };
+
+// 使用 React.memo 优化组件
+export const AirpodsAnimation = React.memo(AirpodsAnimationComponent);

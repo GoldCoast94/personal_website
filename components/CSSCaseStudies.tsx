@@ -336,7 +336,7 @@ export default function CSSCaseStudies() {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
-                  priority
+                  loading="lazy"
                   onError={() =>
                     setImageError((prev) => ({ ...prev, [caseStudy.id]: true }))
                   }

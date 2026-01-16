@@ -111,12 +111,6 @@
         "description": "Create a dynamic particle system with thousands of moving and interacting particles. Demonstrates performance optimization techniques in Three.js when handling large numbers of objects.",
         "modalDescription": "This example creates a dynamic system containing 5000 particles.",
         "tags": ["Particles", "Performance", "Visual Effects"]
-      },
-      "earth3d": {
-        "title": "3D Earth",
-        "description": "Create a realistic 3D Earth model using shaders, including atmosphere effects, starry background, and mouse interaction. Demonstrates Three.js advanced rendering capabilities.",
-        "modalDescription": "This example uses Three.js shader functionality to create a realistic 3D Earth model.",
-        "tags": ["Shaders", "Interaction", "Advanced Rendering"]
       }
     },
     "gsapExamples": {

@@ -18,8 +18,8 @@ const nextConfig = {
       },
     ],
   },
-  // 禁用严格模式以避免开发时的重复渲染
-  reactStrictMode: false,
+  // 启用严格模式以发现潜在性能问题
+  reactStrictMode: true,
 };
 
 export default withNextIntl(nextConfig);

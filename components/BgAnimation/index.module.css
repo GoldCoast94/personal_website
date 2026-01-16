@@ -9,6 +9,8 @@
   background: linear-gradient(45deg, #f8fafc, #e2e8f0);
   pointer-events: none;
   transition: background 0.3s ease;
+  /* CSS Containment 优化：隔离渲染影响 */
+  contain: layout style paint;
 }
 
 /* 暗色模式背景 */
@@ -21,15 +23,15 @@
   border-radius: 50%;
   animation: float linear forwards;
   pointer-events: none;
-  will-change: transform, opacity;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  /* 使用 transform hack 提升到合成层，比 will-change 成本更低 */
+  transform: translateZ(0);
+  /* 移除昂贵的 backdrop-filter，改用简单的 box-shadow */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
 
 /* 暗色模式下的气泡阴影 */
 :global(.dark) .bubble {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
 }
 
 @keyframes float {

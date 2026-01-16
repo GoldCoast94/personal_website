@@ -1,7 +1,34 @@
+"use client";
+
 import { useTranslations } from 'next-intl';
 import { Modal } from '@/components/Gsap/Modal';
-import { RotatingCube, ParticleSystem, Earth3D } from '@/components/ThreeJS';
-import { AirpodsAnimation, ScrollAnimation, TimelineAnimation } from '@/components/Gsap';
+import dynamic from 'next/dynamic';
+
+// 优化：使用动态导入实现代码分割，仅在需要时加载重型组件
+const RotatingCube = dynamic(() => import('@/components/ThreeJS').then(mod => ({ default: mod.RotatingCube })), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>
+});
+
+const ParticleSystem = dynamic(() => import('@/components/ThreeJS').then(mod => ({ default: mod.ParticleSystem })), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>
+});
+
+const AirpodsAnimation = dynamic(() => import('@/components/Gsap/AirpodsAnimation').then(mod => ({ default: mod.AirpodsAnimation })), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>
+});
+
+const ScrollAnimation = dynamic(() => import('@/components/Gsap').then(mod => ({ default: mod.ScrollAnimation })), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>
+});
+
+const TimelineAnimation = dynamic(() => import('@/components/Gsap').then(mod => ({ default: mod.TimelineAnimation })), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>
+});
 
 interface ExampleModalsProps {
   selectedExample: string | null;
@@ -60,31 +87,6 @@ export function ExampleModals({ selectedExample, onClose }: ExampleModalsProps) 
             </h4>
             <div className="relative h-[500px] bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
               <ParticleSystem />
-            </div>
-          </div>
-        </div>
-      </Modal>
-
-      <Modal
-        isOpen={selectedExample === "earth-3d"}
-        onClose={onClose}
-        title={t('threejsExamples.earth3d.title')}
-      >
-        <div className="space-y-6">
-          <div>
-            <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              {tExamples('functionalDescription')}
-            </h4>
-            <p className="text-gray-600 dark:text-gray-300">
-              {t('threejsExamples.earth3d.modalDescription')}
-            </p>
-          </div>
-          <div>
-            <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              {tExamples('liveDemo')}
-            </h4>
-            <div className="relative h-[500px] bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden">
-              <Earth3D />
             </div>
           </div>
         </div>

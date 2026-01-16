@@ -1,18 +1,26 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import ThemeToggle from "./ThemeToggle";
 import LanguageToggle from "./LanguageToggle";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
-export default function Navbar() {
+function Navbar() {
   const t = useTranslations("nav");
-  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname(); // 这个 pathname 已经不包含语言前缀了
+
+  // 优化：使用 useMemo 缓存路径匹配结果
+  const activeStates = useMemo(() => {
+    const paths = ["/", "/tech", "/blog", "/about"];
+    return paths.map((path) => {
+      if (path === "/") return pathname === "/";
+      return pathname.startsWith(path);
+    });
+  }, [pathname]);
 
   const isActive = useCallback(
     (path: string) => {
@@ -25,12 +33,11 @@ export default function Navbar() {
   );
 
   useEffect(() => {
-    const paths = ["/", "/tech", "/blog", "/about"];
-    const index = paths.findIndex((path) => isActive(path));
+    const index = activeStates.findIndex((state) => state);
     if (index !== -1) {
       setActiveIndex(index);
     }
-  }, [isActive]);
+  }, [activeStates]);
 
   useEffect(() => {
     if (navRef.current) {
@@ -214,3 +221,6 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// 使用 React.memo 优化组件
+export default React.memo(Navbar);
