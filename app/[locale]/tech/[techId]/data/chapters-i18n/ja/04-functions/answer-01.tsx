@@ -1,0 +1,118 @@
+import React from 'react';
+
+interface Props {
+  className?: string;
+}
+
+export default function Answer01({ className }: Props) {
+  return (
+    <div className={`section-content ${className || ''}`}>
+      <h3 className="section-title">演習3の解答</h3>
+
+      <pre className="code-block">
+        <code className="language-go">{`package main
+
+import "fmt"
+
+// Map マッピング関数
+func Map(slice []int, fn func(int) int) []int {
+    result := make([]int, len(slice))
+    for i, v := range slice {
+        result[i] = fn(v)
+    }
+    return result
+}
+
+// Filter フィルタリング関数
+func Filter(slice []int, fn func(int) bool) []int {
+    result := make([]int, 0)
+    for _, v := range slice {
+        if fn(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+// Reduce リダクション関数
+func Reduce(slice []int, initial int, fn func(int, int) int) int {
+    result := initial
+    for _, v := range slice {
+        result = fn(result, v)
+    }
+    return result
+}
+
+func main() {
+    numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+    // Mapのテスト：すべての数値を2倍にする
+    doubled := Map(numbers, func(n int) int {
+        return n * 2
+    })
+    fmt.Println("Doubled:", doubled)
+
+    // Filterのテスト：偶数をフィルタリング
+    evens := Filter(numbers, func(n int) bool {
+        return n%2 == 0
+    })
+    fmt.Println("Evens:", evens)
+
+    // Reduceのテスト：合計
+    sum := Reduce(numbers, 0, func(acc, n int) int {
+        return acc + n
+    })
+    fmt.Println("Sum:", sum)
+
+    // 組み合わせ使用：スライス内のすべての偶数を2倍にして合計
+    result := Reduce(
+        Map(
+            Filter(numbers, func(n int) bool {
+                return n%2 == 0
+            }),
+            func(n int) int {
+                return n * 2
+            },
+        ),
+        0,
+        func(acc, n int) int {
+            return acc + n
+        },
+    )
+    fmt.Println("Even numbers * 2, then sum:", result)
+
+    // より明確なステップバイステップ版
+    filtered := Filter(numbers, func(n int) bool { return n%2 == 0 })
+    fmt.Println("Step 1 - Filtered:", filtered)
+
+    mapped := Map(filtered, func(n int) int { return n * 2 })
+    fmt.Println("Step 2 - Mapped:", mapped)
+
+    reduced := Reduce(mapped, 0, func(acc, n int) int { return acc + n })
+    fmt.Println("Step 3 - Reduced:", reduced)
+}`}</code>
+      </pre>
+
+      <ul>
+        <li>**出力：**</li>
+      </ul>
+
+      <pre className="code-block">
+        <code className="language-go">{`Doubled: [2 4 6 8 10 12 14 16 18 20]
+Evens: [2 4 6 8 10]
+Sum: 55
+Even numbers * 2, then sum: 60
+Step 1 - Filtered: [2 4 6 8 10]
+Step 2 - Mapped: [4 8 12 16 20]
+Step 3 - Reduced: 60`}</code>
+      </pre>
+
+    </div>
+  );
+}
+
+export const metadata = {
+  id: '0',
+  title: '演習3の解答',
+  section: '0'
+};

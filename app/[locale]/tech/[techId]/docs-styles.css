@@ -1,0 +1,110 @@
+/* Go 文档样式 */
+.section-content {
+  @apply space-y-4;
+}
+
+.section-title {
+  @apply text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b-2 border-indigo-500;
+}
+
+.section-content h3 {
+  @apply text-xl font-semibold text-gray-900 dark:text-white mt-6 mb-3;
+}
+
+.section-content h4 {
+  @apply text-lg font-semibold text-gray-800 dark:text-gray-200 mt-4 mb-2;
+}
+
+.section-content p {
+  @apply text-gray-700 dark:text-gray-300 leading-relaxed mb-4;
+}
+
+.section-content ul {
+  @apply list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4;
+}
+
+.section-content ol {
+  @apply list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4;
+}
+
+.section-content li {
+  @apply leading-relaxed;
+}
+
+.section-content code {
+  @apply bg-gray-100 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.section-content pre {
+  @apply bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.section-content pre code {
+  @apply bg-transparent text-gray-100 p-0;
+}
+
+.section-content .code-block {
+  @apply bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 text-sm font-mono;
+}
+
+.section-content blockquote {
+  @apply border-l-4 border-indigo-500 pl-4 py-2 my-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-r;
+}
+
+.section-content a {
+  @apply text-indigo-600 dark:text-indigo-400 hover:underline;
+}
+
+.section-content strong,
+.section-content b {
+  @apply font-semibold text-gray-900 dark:text-white;
+}
+
+.section-content em,
+.section-content i {
+  @apply italic;
+}
+
+.section-content table {
+  @apply w-full border-collapse my-4;
+}
+
+.section-content th {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-semibold p-2 border border-gray-300 dark:border-gray-600;
+}
+
+.section-content td {
+  @apply p-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300;
+}
+
+.section-content hr {
+  @apply my-6 border-gray-300 dark:border-gray-600;
+}
+
+/* 代码高亮主题 */
+.language-go,
+.language-javascript,
+.language-typescript,
+.language-python,
+.language-bash {
+  @apply text-sm leading-relaxed;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .section-content {
+    @apply text-sm;
+  }
+
+  .section-title {
+    @apply text-xl;
+  }
+
+  .section-content h3 {
+    @apply text-lg;
+  }
+
+  .section-content h4 {
+    @apply text-base;
+  }
+}

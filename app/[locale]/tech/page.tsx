@@ -86,7 +86,7 @@ export default function TechPage() {
           {techCategories.map((tech) => (
             <Link
               key={tech.id}
-              href={`/${locale}/tech/${tech.id}`}
+              href={tech.id === 'go' ? `/${locale}/tech/go-docs` : `/${locale}/tech/${tech.id}`}
               className="group relative h-full"
               onMouseEnter={() => setHoveredId(tech.id)}
               onMouseLeave={() => setHoveredId(null)}
