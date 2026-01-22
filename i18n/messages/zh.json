@@ -160,6 +160,12 @@
       }
     }
   },
+  "search": {
+    "placeholder": "搜索博客文章...",
+    "noResults": "未找到相关文章",
+    "hint": "输入关键词搜索博客文章",
+    "navigation": "上下键导航"
+  },
   "examples": {
     "clickToView": "点击查看示例",
     "functionalDescription": "功能说明",

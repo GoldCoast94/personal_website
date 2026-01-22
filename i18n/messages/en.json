@@ -160,6 +160,12 @@
       }
     }
   },
+  "search": {
+    "placeholder": "Search blog posts...",
+    "noResults": "No articles found",
+    "hint": "Enter keywords to search blog posts",
+    "navigation": "Navigate with arrow keys"
+  },
   "examples": {
     "clickToView": "Click to view example",
     "functionalDescription": "Functional Description",

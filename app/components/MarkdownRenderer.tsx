@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -11,18 +11,16 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
-// 生成标题 ID 的辅助函数
+// 生成标题 ID（与 TableOfContents 保持一致）
 const generateHeadingId = (text: string, index: number): string => {
   let id = text
     .toLowerCase()
     .replace(/[^\w\s\u4e00-\u9fa5-]/g, "")
     .replace(/\s+/g, "-");
 
-  // 如果 ID 为空或只有连字符，使用索引作为后缀
   if (!id || id === "-") {
     id = `heading-${index}`;
   } else {
-    // 添加索引确保唯一性
     id = `${id}-${index}`;
   }
 
@@ -33,13 +31,21 @@ export default function MarkdownRenderer({
   content,
   className = "",
 }: MarkdownRendererProps) {
-  // 使用 ref 来跟踪标题计数
-  const headingCountRef = React.useRef(0);
+  // 预先从 markdown 内容中提取所有标题并生成 ID
+  const headingIds = useMemo(() => {
+    const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+    const matches = Array.from(content.matchAll(headingRegex));
 
-  // 重置计数器（每次内容改变时）
-  React.useEffect(() => {
-    headingCountRef.current = 0;
+    const ids = new Map<string, string>();
+    matches.forEach((match, index) => {
+      const text = match[2].trim();
+      const id = generateHeadingId(text, index);
+      ids.set(text, id);
+    });
+
+    return ids;
   }, [content]);
+
   return (
     <div
       className={`prose dark:prose-invert max-w-none prose-lg markdown-content
@@ -72,10 +78,9 @@ export default function MarkdownRenderer({
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight, rehypeRaw]}
         components={{
-          // 自定义标题渲染，添加 ID
           h1({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h1 id={id} {...props}>
                 {children}
@@ -84,7 +89,7 @@ export default function MarkdownRenderer({
           },
           h2({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h2 id={id} {...props}>
                 {children}
@@ -93,7 +98,7 @@ export default function MarkdownRenderer({
           },
           h3({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h3 id={id} {...props}>
                 {children}
@@ -102,7 +107,7 @@ export default function MarkdownRenderer({
           },
           h4({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h4 id={id} {...props}>
                 {children}
@@ -111,7 +116,7 @@ export default function MarkdownRenderer({
           },
           h5({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h5 id={id} {...props}>
                 {children}
@@ -120,31 +125,13 @@ export default function MarkdownRenderer({
           },
           h6({ children, ...props }) {
             const text = children?.toString() || "";
-            const id = generateHeadingId(text, headingCountRef.current++);
+            const id = headingIds.get(text);
             return (
               <h6 id={id} {...props}>
                 {children}
               </h6>
             );
           },
-          // 自定义代码块渲染
-          code(props) {
-            const { inline, className, children, ...rest } = props as {
-              inline?: boolean;
-              className?: string;
-              children?: React.ReactNode;
-            };
-            return !inline ? (
-              <code className={className} {...rest}>
-                {children}
-              </code>
-            ) : (
-              <code className={className} {...rest}>
-                {children}
-              </code>
-            );
-          },
-          // 自定义链接渲染
           a({ children, href, ...props }) {
             return (
               <a

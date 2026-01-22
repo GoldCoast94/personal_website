@@ -160,6 +160,12 @@
       }
     }
   },
+  "search": {
+    "placeholder": "ブログ記事を検索...",
+    "noResults": "記事が見つかりません",
+    "hint": "キーワードを入力してブログ記事を検索",
+    "navigation": "矢印キーで移動"
+  },
   "examples": {
     "clickToView": "クリックして例を表示",
     "functionalDescription": "機能説明",
