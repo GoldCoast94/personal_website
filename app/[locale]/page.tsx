@@ -5,9 +5,9 @@ import BgAnimation from "@/components/BgAnimation";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen bg-gradient-to-br from-sky-200 via-blue-100 to-indigo-200 dark:from-slate-950 dark:via-slate-900 dark:to-black">
       <BgAnimation />
-      <div className="relative z-10 space-y-8">
+      <div className="relative z-30">
         <HomeCarousel />
       </div>
     </main>

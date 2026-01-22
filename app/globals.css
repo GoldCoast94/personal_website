@@ -55,6 +55,147 @@ body::-webkit-scrollbar {
   }
 }
 
+/* 星空背景效果 */
+.starfield {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 创建4个不同大小层级的星星 */
+.starfield::before,
+.starfield::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border-radius: 50%;
+}
+
+/* 微小星星层（0.5px, 最暗） */
+.starfield::before {
+  width: 0.5px;
+  height: 0.5px;
+  box-shadow:
+    10vw 10vh rgba(255, 255, 255, 0.4), 20vw 25vh rgba(255, 255, 255, 0.5),
+    35vw 15vh rgba(255, 255, 255, 0.3), 50vw 40vh rgba(255, 255, 255, 0.6),
+    65vw 30vh rgba(255, 255, 255, 0.4), 80vw 55vh rgba(255, 255, 255, 0.5),
+    15vw 60vh rgba(255, 255, 255, 0.4), 45vw 70vh rgba(255, 255, 255, 0.3),
+    70vw 45vh rgba(255, 255, 255, 0.5), 25vw 80vh rgba(255, 255, 255, 0.4),
+    90vw 20vh rgba(255, 255, 255, 0.6), 55vw 35vh rgba(255, 255, 255, 0.3),
+    75vw 65vh rgba(255, 255, 255, 0.5), 40vw 50vh rgba(255, 255, 255, 0.4),
+    60vw 75vh rgba(255, 255, 255, 0.5), 30vw 90vh rgba(255, 255, 255, 0.3),
+    85vw 85vh rgba(255, 255, 255, 0.4), 5vw 40vh rgba(255, 255, 255, 0.6),
+    95vw 60vh rgba(255, 255, 255, 0.5), 12vw 72vh rgba(255, 255, 255, 0.4),
+    42vw 12vh rgba(255, 255, 255, 0.3), 72vw 88vh rgba(255, 255, 255, 0.5),
+    22vw 42vh rgba(255, 255, 255, 0.4), 52vw 22vh rgba(255, 255, 255, 0.6),
+    82vw 52vh rgba(255, 255, 255, 0.3);
+  animation: starsAnimation 250s linear infinite;
+}
+
+/* 中等星星层（1px-2px混合） */
+.starfield::after {
+  width: 1.5px;
+  height: 1.5px;
+  box-shadow:
+    8vw 48vh 0 0 rgba(255, 255, 255, 0.7),
+    38vw 68vh 0 0.5px rgba(255, 255, 255, 0.8),
+    68vw 28vh 0 0 rgba(255, 255, 255, 0.6),
+    88vw 78vh 0 1px rgba(255, 255, 255, 0.9),
+    18vw 38vh 0 0 rgba(255, 255, 255, 0.7),
+    48vw 58vh 0 0.5px rgba(255, 255, 255, 0.8),
+    78vw 18vh 0 0 rgba(255, 255, 255, 0.6),
+    28vw 78vh 0 1px rgba(255, 255, 255, 0.85),
+    58vw 8vh 0 0 rgba(255, 255, 255, 0.7),
+    3vw 33vh 0 0.5px rgba(255, 255, 255, 0.75),
+    33vw 63vh 0 0 rgba(255, 255, 255, 0.65),
+    63vw 93vh 0 1px rgba(255, 255, 255, 0.9),
+    93vw 23vh 0 0 rgba(255, 255, 255, 0.7),
+    23vw 53vh 0 0.5px rgba(255, 255, 255, 0.8),
+    53vw 83vh 0 0 rgba(255, 255, 255, 0.6),
+    83vw 13vh 0 1px rgba(255, 255, 255, 0.85);
+  animation: starsAnimation 180s linear infinite;
+}
+
+/* 大星星层（2px-3px，更亮） */
+.star-layer-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow:
+    14vw 18vh 0 0.5px rgba(255, 255, 255, 0.9),
+    44vw 52vh 0 1px rgba(255, 255, 255, 0.95),
+    74vw 24vh 0 0.5px rgba(255, 255, 255, 0.85),
+    24vw 76vh 0 1px rgba(255, 255, 255, 0.9),
+    84vw 44vh 0 0.5px rgba(255, 255, 255, 0.95),
+    54vw 84vh 0 1px rgba(255, 255, 255, 0.9),
+    4vw 54vh 0 0.5px rgba(255, 255, 255, 0.85),
+    64vw 14vh 0 1px rgba(255, 255, 255, 0.95),
+    94vw 64vh 0 0.5px rgba(255, 255, 255, 0.9),
+    34vw 34vh 0 1px rgba(255, 255, 255, 0.85);
+  animation: starsAnimation 220s linear infinite;
+}
+
+/* 特大星星层（3px-4px，最亮，带闪烁） */
+.star-layer-xlarge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow:
+    16vw 32vh 0 1px rgba(255, 255, 255, 1),
+    46vw 66vh 0 1.5px rgba(255, 255, 255, 0.95),
+    76vw 12vh 0 1px rgba(255, 255, 255, 1),
+    26vw 82vh 0 1.5px rgba(255, 255, 255, 0.95),
+    86vw 46vh 0 1px rgba(255, 255, 255, 1);
+  animation: starsAnimation 160s linear infinite, starTwinkle 3s ease-in-out infinite;
+}
+
+/* 闪烁动画 */
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* 暗色模式下的星星 */
+html.dark .starfield::before,
+html.dark .starfield::after,
+html.dark .star-layer-large,
+html.dark .star-layer-xlarge {
+  opacity: 1;
+}
+
+/* 亮色模式下的星星（调整透明度和颜色） */
+html:not(.dark) .starfield::before,
+html:not(.dark) .starfield::after,
+html:not(.dark) .star-layer-large,
+html:not(.dark) .star-layer-xlarge {
+  opacity: 0.6;
+  filter: brightness(0.8);
+}
+
+@keyframes starsAnimation {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
 /* Markdown 代码高亮样式优化 */
 .prose pre {
   overflow-x: auto;
