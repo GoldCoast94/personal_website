@@ -20,13 +20,13 @@ const loadSectionComponent = (locale: string, chapterPath: string, componentName
   const normalizedLocale = supportedLocales.includes(locale) ? locale : 'zh';
 
   return lazy(() =>
-    import(`../data/chapters-i18n/${normalizedLocale}/${chapterPath}/${componentName}.tsx`)
+    import(`../data/go-chapters-i18n/${normalizedLocale}/${chapterPath}/${componentName}.tsx`)
       .then((mod) => ({ default: mod.default }))
       .catch((err) => {
         console.error(`Failed to load component: ${normalizedLocale}/${chapterPath}/${componentName}`, err);
         // 如果加载失败且不是中文，尝试加载中文版本作为后备
         if (normalizedLocale !== 'zh') {
-          return import(`../data/chapters-i18n/zh/${chapterPath}/${componentName}.tsx`)
+          return import(`../data/go-chapters-i18n/zh/${chapterPath}/${componentName}.tsx`)
             .then((mod) => ({ default: mod.default }))
             .catch(() => ({ default: () => <div className="text-red-600 dark:text-red-400">{errorMessage}</div> }));
         }
@@ -58,10 +58,10 @@ export function GoDocsContent({ chapter, section, onPrevious, onNext, hasPreviou
     <div className="max-w-4xl mx-auto">
       {/* 面包屑导航 */}
       <div className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-        <span>{chapter.id}. {chapter.title}</span>
+        <span>{chapter.id}. {t(`chapters.${chapter.id}`)}</span>
         <span className="mx-2">/</span>
         <span className="text-gray-700 dark:text-gray-300 font-medium">
-          {section.section} {section.title}
+          {section.section} {t(`sections.${section.id}`)}
         </span>
       </div>
 
