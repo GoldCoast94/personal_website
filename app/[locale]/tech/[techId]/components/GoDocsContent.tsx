@@ -11,22 +11,24 @@ interface GoDocsContentProps {
   onNext?: () => void;
   hasPrevious?: boolean;
   hasNext?: boolean;
+  namespace?: string; // 翻译命名空间，默认为 'goDocs'
+  chaptersPath?: string; // 章节文件路径，默认为 'go-chapters-i18n'
 }
 
 // 动态导入章节组件
-const loadSectionComponent = (locale: string, chapterPath: string, componentName: string, errorMessage: string) => {
+const loadSectionComponent = (locale: string, chapterPath: string, componentName: string, errorMessage: string, chaptersBasePath: string = 'go-chapters-i18n') => {
   // 支持的语言，默认为中文
   const supportedLocales = ['zh', 'en', 'ja'];
   const normalizedLocale = supportedLocales.includes(locale) ? locale : 'zh';
 
   return lazy(() =>
-    import(`../data/go-chapters-i18n/${normalizedLocale}/${chapterPath}/${componentName}.tsx`)
+    import(`../data/${chaptersBasePath}/${normalizedLocale}/${chapterPath}/${componentName}.tsx`)
       .then((mod) => ({ default: mod.default }))
       .catch((err) => {
         console.error(`Failed to load component: ${normalizedLocale}/${chapterPath}/${componentName}`, err);
         // 如果加载失败且不是中文，尝试加载中文版本作为后备
         if (normalizedLocale !== 'zh') {
-          return import(`../data/go-chapters-i18n/zh/${chapterPath}/${componentName}.tsx`)
+          return import(`../data/${chaptersBasePath}/zh/${chapterPath}/${componentName}.tsx`)
             .then((mod) => ({ default: mod.default }))
             .catch(() => ({ default: () => <div className="text-red-600 dark:text-red-400">{errorMessage}</div> }));
         }
@@ -35,8 +37,8 @@ const loadSectionComponent = (locale: string, chapterPath: string, componentName
   );
 };
 
-export function GoDocsContent({ chapter, section, onPrevious, onNext, hasPrevious, hasNext }: GoDocsContentProps) {
-  const t = useTranslations('goDocs');
+export function GoDocsContent({ chapter, section, onPrevious, onNext, hasPrevious, hasNext, namespace = 'goDocs', chaptersPath = 'go-chapters-i18n' }: GoDocsContentProps) {
+  const t = useTranslations(namespace);
   const locale = useLocale();
 
   if (!chapter || !section) {
@@ -52,7 +54,7 @@ export function GoDocsContent({ chapter, section, onPrevious, onNext, hasPreviou
     );
   }
 
-  const SectionComponent = loadSectionComponent(locale, chapter.path, section.component, t('loadError'));
+  const SectionComponent = loadSectionComponent(locale, chapter.path, section.component, t('loadError'), chaptersPath);
 
   return (
     <div className="max-w-4xl mx-auto">

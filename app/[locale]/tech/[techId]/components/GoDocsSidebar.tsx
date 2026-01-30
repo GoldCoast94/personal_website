@@ -8,10 +8,11 @@ interface GoDocsSidebarProps {
   chapters: Chapter[];
   activeSection: string;
   onSectionClick: (sectionId: string, chapterId: string) => void;
+  namespace?: string; // 翻译命名空间，默认为 'goDocs'
 }
 
-export function GoDocsSidebar({ chapters, activeSection, onSectionClick }: GoDocsSidebarProps) {
-  const t = useTranslations('goDocs');
+export function GoDocsSidebar({ chapters, activeSection, onSectionClick, namespace = 'goDocs' }: GoDocsSidebarProps) {
+  const t = useTranslations(namespace);
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set(['01']));
 
   const toggleChapter = (chapterId: string) => {

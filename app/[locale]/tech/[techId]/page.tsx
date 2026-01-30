@@ -69,6 +69,15 @@ export default function TechDetailPage() {
     router.push(`?item=${itemId}`, { scroll: false });
   };
 
+  // 重定向到专门的文档页面
+  useEffect(() => {
+    if (techId === 'go') {
+      router.push(`/${locale}/tech/go-docs`);
+    } else if (techId === 'javascript') {
+      router.push(`/${locale}/tech/javascript-docs`);
+    }
+  }, [techId, router, locale]);
+
   if (!tech) {
     return (
       <div className="h-[calc(100vh-4rem)] flex items-center justify-center">

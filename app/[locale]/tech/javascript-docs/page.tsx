@@ -1,55 +1,63 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { GoDocsSidebar } from '../[techId]/components/GoDocsSidebar';
-import { GoDocsContent } from '../[techId]/components/GoDocsContent';
-import { getAllChapters, getSectionById, getPreviousSection, getNextSection } from '../[techId]/data/go-docs';
-import '../[techId]/docs-styles.css';
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { GoDocsSidebar } from "../[techId]/components/GoDocsSidebar";
+import { GoDocsContent } from "../[techId]/components/GoDocsContent";
+import {
+  getAllJavaScriptChapters,
+  getJavaScriptSectionById,
+  getJavaScriptPreviousSection,
+  getJavaScriptNextSection,
+} from "../[techId]/data/javascript-docs";
+import "../[techId]/docs-styles.css";
 
-export default function GoDocsPage() {
+export default function JavaScriptDocsPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const t = useTranslations('goDocs');
-  const [activeSection, setActiveSection] = useState<string>('1-1-1');
+  const t = useTranslations("javascriptDocs");
+  const [activeSection, setActiveSection] = useState<string>("1-1-1");
 
   // 性能优化：缓存章节数据
-  const chapters = useMemo(() => getAllChapters(), []);
+  const chapters = useMemo(() => getAllJavaScriptChapters(), []);
 
   // 从 URL 参数读取选中的小节
   useEffect(() => {
-    const sectionParam = searchParams.get('section');
+    const sectionParam = searchParams.get("section");
     if (sectionParam) {
       setActiveSection(sectionParam);
     } else {
       // 默认选择第一个小节
-      router.replace('?section=1-1-1', { scroll: false });
+      router.replace("?section=1-1-1", { scroll: false });
     }
   }, [searchParams, router]);
 
   // 处理小节点击
-  const handleSectionClick = useCallback((sectionId: string) => {
-    setActiveSection(sectionId);
-    router.push(`?section=${sectionId}`, { scroll: false });
-  }, [router]);
+  const handleSectionClick = useCallback(
+    (sectionId: string) => {
+      setActiveSection(sectionId);
+      router.push(`?section=${sectionId}`, { scroll: false });
+    },
+    [router],
+  );
 
   // 性能优化：使用 useMemo 缓存当前小节和导航信息
-  const currentData = useMemo(() => getSectionById(activeSection), [activeSection]);
-  const previousSection = useMemo(() => getPreviousSection(activeSection), [activeSection]);
-  const nextSection = useMemo(() => getNextSection(activeSection), [activeSection]);
+  const currentData = useMemo(() => getJavaScriptSectionById(activeSection), [activeSection]);
+  const previousSection = useMemo(() => getJavaScriptPreviousSection(activeSection), [activeSection]);
+  const nextSection = useMemo(() => getJavaScriptNextSection(activeSection), [activeSection]);
 
   // 导航到上一节
   const handlePrevious = useCallback(() => {
-    const prev = getPreviousSection(activeSection);
+    const prev = getJavaScriptPreviousSection(activeSection);
     if (prev) {
       handleSectionClick(prev.section.id);
       // 滚动到顶部
       setTimeout(() => {
-        const contentArea = document.querySelector('.overflow-y-auto');
+        const contentArea = document.querySelector(".overflow-y-auto");
         if (contentArea) {
-          contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+          contentArea.scrollTo({ top: 0, behavior: "smooth" });
         }
       }, 50);
     }
@@ -57,14 +65,14 @@ export default function GoDocsPage() {
 
   // 导航到下一节
   const handleNext = useCallback(() => {
-    const next = getNextSection(activeSection);
+    const next = getJavaScriptNextSection(activeSection);
     if (next) {
       handleSectionClick(next.section.id);
       // 滚动到顶部
       setTimeout(() => {
-        const contentArea = document.querySelector('.overflow-y-auto');
+        const contentArea = document.querySelector(".overflow-y-auto");
         if (contentArea) {
-          contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+          contentArea.scrollTo({ top: 0, behavior: "smooth" });
         }
       }, 50);
     }
@@ -73,20 +81,23 @@ export default function GoDocsPage() {
   // 键盘快捷键支持
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // 如果正在输入，不触发快捷键
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+      // 如果正在输入,不触发快捷键
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
         return;
       }
 
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         handlePrevious();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         handleNext();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handlePrevious, handleNext]); // 依赖导航函数
 
   return (
@@ -112,29 +123,29 @@ export default function GoDocsPage() {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-              {t('backToTech')}
+              {t("backToTech")}
             </Link>
 
             <div className="flex items-center space-x-4">
-              <div className="w-14 h-14 rounded-lg bg-white dark:bg-gray-100 flex items-center justify-center p-2.5 shadow-sm">
+              <div className="w-14 h-14 rounded-lg bg-white flex items-center justify-center p-2.5 shadow-sm">
                 <img
-                  src="/images/go-gopher.png"
-                  alt="Go"
+                  src="/images/javascript-logo.svg"
+                  alt="JavaScript"
                   className="w-full h-full object-contain"
                 />
               </div>
               <div>
                 <div className="flex items-center space-x-4">
                   <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                    {t('title')}
+                    {t("title")}
                   </h1>
                   <a
-                    href="https://go.dev/"
+                    href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline flex items-center"
                   >
-                    {t('officialDocs')}
+                    {t("officialDocs")}
                     <svg
                       className="w-4 h-4 ml-1"
                       fill="none"
@@ -151,20 +162,21 @@ export default function GoDocsPage() {
                   </a>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mt-1 text-sm md:text-base">
-                  {t('subtitle')}
+                  {t("subtitle")}
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 主要内容区域：左侧导航 + 右侧内容 */}
+        {/* 主要内容区域:左侧导航 + 右侧内容 */}
         <div className="flex-1 flex overflow-hidden">
           {/* 左侧导航 */}
           <GoDocsSidebar
             chapters={chapters}
             activeSection={activeSection}
             onSectionClick={handleSectionClick}
+            namespace="javascriptDocs"
           />
 
           {/* 右侧内容 */}
@@ -177,6 +189,8 @@ export default function GoDocsPage() {
                 onNext={handleNext}
                 hasPrevious={!!previousSection}
                 hasNext={!!nextSection}
+                namespace="javascriptDocs"
+                chaptersPath="javascript-chapters-i18n"
               />
             </div>
           </div>

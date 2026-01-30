@@ -379,16 +379,11 @@ export function getChapterById(id: string): Chapter | undefined {
 }
 
 /**
- * 获取小节信息
+ * 获取小节信息（已优化）
  */
 export function getSectionById(sectionId: string): { chapter: Chapter; section: Section } | undefined {
-  for (const chapter of goDocsChapters) {
-    const section = chapter.sections.find(s => s.id === sectionId);
-    if (section) {
-      return { chapter, section };
-    }
-  }
-  return undefined;
+  initializeCache();
+  return cachedSectionMap!.get(sectionId);
 }
 
 /**
@@ -398,44 +393,66 @@ export function getAllChapters(): Chapter[] {
   return goDocsChapters;
 }
 
-/**
- * 获取所有小节的扁平列表
- */
-export function getAllSections(): Array<{ chapter: Chapter; section: Section }> {
-  const allSections: Array<{ chapter: Chapter; section: Section }> = [];
+// 性能优化：缓存计算结果
+let cachedAllSections: Array<{ chapter: Chapter; section: Section }> | null = null;
+let cachedSectionMap: Map<string, { chapter: Chapter; section: Section }> | null = null;
+let cachedSectionIndexMap: Map<string, number> | null = null;
 
-  for (const chapter of goDocsChapters) {
-    for (const section of chapter.sections) {
-      allSections.push({ chapter, section });
-    }
+/**
+ * 初始化缓存
+ */
+function initializeCache() {
+  if (cachedAllSections && cachedSectionMap && cachedSectionIndexMap) {
+    return;
   }
 
-  return allSections;
+  cachedAllSections = [];
+  cachedSectionMap = new Map();
+  cachedSectionIndexMap = new Map();
+
+  let index = 0;
+  for (const chapter of goDocsChapters) {
+    for (const section of chapter.sections) {
+      const item = { chapter, section };
+      cachedAllSections.push(item);
+      cachedSectionMap.set(section.id, item);
+      cachedSectionIndexMap.set(section.id, index);
+      index++;
+    }
+  }
 }
 
 /**
- * 获取上一节
+ * 获取所有小节的扁平列表（已优化）
+ */
+export function getAllSections(): Array<{ chapter: Chapter; section: Section }> {
+  initializeCache();
+  return cachedAllSections!;
+}
+
+/**
+ * 获取上一节（已优化）
  */
 export function getPreviousSection(currentSectionId: string): { chapter: Chapter; section: Section } | undefined {
-  const allSections = getAllSections();
-  const currentIndex = allSections.findIndex(item => item.section.id === currentSectionId);
+  initializeCache();
+  const currentIndex = cachedSectionIndexMap!.get(currentSectionId);
 
-  if (currentIndex > 0) {
-    return allSections[currentIndex - 1];
+  if (currentIndex !== undefined && currentIndex > 0) {
+    return cachedAllSections![currentIndex - 1];
   }
 
   return undefined;
 }
 
 /**
- * 获取下一节
+ * 获取下一节（已优化）
  */
 export function getNextSection(currentSectionId: string): { chapter: Chapter; section: Section } | undefined {
-  const allSections = getAllSections();
-  const currentIndex = allSections.findIndex(item => item.section.id === currentSectionId);
+  initializeCache();
+  const currentIndex = cachedSectionIndexMap!.get(currentSectionId);
 
-  if (currentIndex >= 0 && currentIndex < allSections.length - 1) {
-    return allSections[currentIndex + 1];
+  if (currentIndex !== undefined && currentIndex < cachedAllSections!.length - 1) {
+    return cachedAllSections![currentIndex + 1];
   }
 
   return undefined;
